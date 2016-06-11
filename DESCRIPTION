@@ -1,0 +1,9 @@
+Package: Discovr
+Title: Discovr
+Description: A statistical method validation package
+Version: 0.1
+Author: Robin Kohze <robin@kohze.com>
+Maintainer: Robin Kohze <robin@kohze.com>
+License: MIT
+LazyData: true
+RoxygenNote: 5.0.1
