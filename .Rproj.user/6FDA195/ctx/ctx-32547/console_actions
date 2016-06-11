@@ -1,0 +1,40 @@
+{
+    "data" : [
+        "\nR version 3.3.0 (2016-05-03) -- \"Supposedly Educational\"\nCopyright (C) 2016 The R Foundation for Statistical Computing\nPlatform: x86_64-w64-mingw32/x64 (64-bit)\n\nR is free software and comes with ABSOLUTELY NO WARRANTY.\nYou are welcome to redistribute it under certain conditions.\nType 'license()' or 'licence()' for distribution details.\n\nR is a collaborative project with many contributors.\nType 'contributors()' for more information and\n'citation()' on how to cite R or R packages in publications.\n\nType 'demo()' for some demos, 'help()' for on-line help, or\n'help.start()' for an HTML browser interface to help.\nType 'q()' to quit R.\n\n",
+        "\nRestarting R session...\n\n",
+        "> ",
+        "library(Discovr)",
+        "> ",
+        " a = data.frame(c(1,2,3),c(3,3,3))",
+        "> ",
+        "disc(a)",
+        "\n\tWelch Two Sample t-test\n\ndata:  input[[1]] and input[[2]]\nt = -1.7321, df = 2, p-value = 0.2254\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -3.484138  1.484138\nsample estimates:\nmean of x mean of y \n        2         3 \n\n\nRestarting R session...\n\n",
+        "> ",
+        "library(Discovr)",
+        "> ",
+        "a",
+        "  c.1..2..3. c.3..3..3.\n1          1          3\n2          2          3\n3          3          3\n",
+        "> ",
+        "disc(a)",
+        "\n\tWelch Two Sample t-test\n\ndata:  input[[1]] and input[[2]]\nt = -1.7321, df = 2, p-value = 0.2254\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -3.484138  1.484138\nsample estimates:\nmean of x mean of y \n        2         3 \n\n\nRestarting R session...\n\n"
+    ],
+    "type" : [
+        2,
+        2,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        2,
+        0,
+        1,
+        0,
+        1,
+        2,
+        0,
+        1,
+        2
+    ]
+}

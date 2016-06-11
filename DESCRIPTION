@@ -7,3 +7,7 @@ Maintainer: Robin Kohze <robin@kohze.com>
 License: MIT
 LazyData: true
 RoxygenNote: 5.0.1
+Collate:
+    'test.R'
+    'discovr.R'
+    'ggTransfer.R'

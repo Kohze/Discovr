@@ -3,7 +3,25 @@
 #' @return The calculation output
 #' @export
 disc <- function(x){
-  input = x
-  t = t.test(input[[1]],input[[2]])
-  return(t)
+  input = as.data.frame(x)
+  cols = length(input)
+  d = welchTest(input)
+  e = shapiroTest(input)
+  return(e)
+}
+
+#' Welchs T.Test
+#' @param input A data.frame or data.table
+#' @return The calculation output
+welchTest <- function(input){
+  output = t.test(input[[1]],input[[2]])
+  return(output)
+}
+
+#' Shapiro Wilks Test
+#' @param input A data.frame or data.table
+#' @return The calculation output
+shapiroTest <- function(input){
+  output = c(shapiro.test(input[[1]]),shapiro.test(input[[2]]))
+  return(output)
 }
