@@ -1,4 +1,4 @@
-#
+# Discovr Shiny application
 #
 
 library(shiny)
