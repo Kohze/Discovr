@@ -12,7 +12,7 @@ disc <- function(x){
 
 #' Welchs T.Test
 #' @param input A data.frame or data.table
-#' @return The calculation output
+#' @return indicates whether parameter are from same population
 welchTest <- function(input){
   output = t.test(input[[1]],input[[2]])
   return(output)
@@ -20,7 +20,7 @@ welchTest <- function(input){
 
 #' Shapiro Wilks Test
 #' @param input A data.frame or data.table
-#' @return The calculation output
+#' @return indicates normal distribution
 shapiroTest <- function(input){
   output = c(shapiro.test(input[[1]]),shapiro.test(input[[2]]))
   return(output)
