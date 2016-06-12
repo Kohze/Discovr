@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#discovr ggplot transform function",
+    "created" : 1465753232688.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "960510480",
+    "id" : "17915246",
+    "lastKnownWriteTime" : 1465595220,
+    "last_content_update" : 1465595220,
+    "path" : "~/Discovr/R/ggTransfer.R",
+    "project_path" : "R/ggTransfer.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

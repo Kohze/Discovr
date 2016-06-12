@@ -1,8 +1,10 @@
 #' discovr() main code
 #' @param x A data.frame or data.table
+#' @param y Additional options
 #' @return The calculation output
 #' @export
-disc <- function(x){
+disc <- function(x,y){
+  option = as.character(y)
   input = as.data.frame(x)
   cols = length(input)
   d = welchTest(input)
