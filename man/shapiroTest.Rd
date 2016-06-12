@@ -10,7 +10,7 @@ shapiroTest(input)
 \item{input}{A data.frame or data.table}
 }
 \value{
-The calculation output
+indicates normal distribution
 }
 \description{
 Shapiro Wilks Test

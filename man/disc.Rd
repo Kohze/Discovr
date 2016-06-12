@@ -4,10 +4,12 @@
 \alias{disc}
 \title{discovr() main code}
 \usage{
-disc(x)
+disc(x, y)
 }
 \arguments{
 \item{x}{A data.frame or data.table}
+
+\item{y}{Additional options}
 }
 \value{
 The calculation output

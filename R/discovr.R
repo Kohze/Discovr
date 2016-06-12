@@ -9,6 +9,7 @@ disc <- function(x,y){
   cols = length(input)
   d = welchTest(input)
   e = shapiroTest(input)
+  f = corTest(input)
   return(e)
 }
 
@@ -25,5 +26,13 @@ welchTest <- function(input){
 #' @return indicates normal distribution
 shapiroTest <- function(input){
   output = c(shapiro.test(input[[1]]),shapiro.test(input[[2]]))
+  return(output)
+}
+
+#' Correlation Test
+#' @param input A data.frame or data.table
+#' @return indicates correlation between parameters
+corTest <- function(input){
+  output = cor(input[[1]],input[[2]])
   return(output)
 }
