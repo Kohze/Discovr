@@ -116,7 +116,7 @@ wilcoxonTest <- function(input){
   return(output)
 }
 
-#'  Mann-Whitney U test - Wilcoxon sum rank test
+#' Mann-Whitney U test - Wilcoxon sum rank test
 #' @param input A data.frame or data.table
 #' @return Alternative test for the paired t-test if data is not normal - on independent samples
 mannWhitTest <- function(input){
