@@ -4,7 +4,8 @@
 #' @return The calculation output
 #' @export
 disc <- function(x,y){
-  option = as.character(y)
+  method = as.character(y)
+  #if(method == "paired") pairedTest(x) else unpairedTest(x)
   input = as.data.frame(x)
   cols = length(input)
   d = welchTest(input)
@@ -34,5 +35,13 @@ shapiroTest <- function(input){
 #' @return indicates correlation between parameters
 corTest <- function(input){
   output = cor(input[[1]],input[[2]])
+  return(output)
+}
+
+#' Anova Test
+#' @param input A data.frame or data.table
+#' @return analyzes the variance of the given samples
+corTest <- function(input){
+  output = aov(input[[1]]~input[[2]])
   return(output)
 }

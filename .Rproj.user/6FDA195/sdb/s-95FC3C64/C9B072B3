@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' discovr() main code\n#' @param x A data.frame or data.table\n#' @param y Additional options\n#' @return The calculation output\n#' @export\ndisc <- function(x,y){\n  method = as.character(y)\n  #if(method == \"paired\") pairedTest(x) else unpairedTest(x)\n  input = as.data.frame(x)\n  cols = length(input)\n  d = welchTest(input)\n  e = shapiroTest(input)\n  f = corTest(input)\n  return(e)\n}\n\n#' Welchs T.Test\n#' @param input A data.frame or data.table\n#' @return indicates whether parameter are from same population\nwelchTest <- function(input){\n  output = t.test(input[[1]],input[[2]])\n  return(output)\n}\n\n#' Shapiro Wilks Test\n#' @param input A data.frame or data.table\n#' @return indicates normal distribution\nshapiroTest <- function(input){\n  output = c(shapiro.test(input[[1]]),shapiro.test(input[[2]]))\n  return(output)\n}\n\n#' Correlation Test\n#' @param input A data.frame or data.table\n#' @return indicates correlation between parameters\ncorTest <- function(input){\n  output = cor(input[[1]],input[[2]])\n  return(output)\n}\n\n#' Anova Test\n#' @param input A data.frame or data.table\n#' @return analyzes the variance of the given samples\ncorTest <- function(input){\n  output = aov(input[[1]]~input[[2]])\n  return(output)\n}",
+    "created" : 1465846168116.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2755870699",
+    "id" : "C9B072B3",
+    "lastKnownWriteTime" : 1465850523,
+    "last_content_update" : 1465850523528,
+    "path" : "~/Discovr/R/discovr.R",
+    "project_path" : "R/discovr.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

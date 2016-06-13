@@ -5,14 +5,22 @@
 \title{Correlation Test}
 \usage{
 corTest(input)
+
+corTest(input)
 }
 \arguments{
+\item{input}{A data.frame or data.table}
+
 \item{input}{A data.frame or data.table}
 }
 \value{
 indicates correlation between parameters
+
+analyzes the variance of the given samples
 }
 \description{
 Correlation Test
+
+Anova Test
 }
 
