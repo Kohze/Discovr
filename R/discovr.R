@@ -5,13 +5,67 @@
 #' @export
 disc <- function(x,y){
   method = as.character(y)
-  #if(method == "paired") pairedTest(x) else unpairedTest(x)
+  #if(method == "paired") pairedTest(x) else unPairedTest(x)
   input = as.data.frame(x)
   cols = length(input)
-  d = welchTest(input)
+  
   e = shapiroTest(input)
-  f = corTest(input)
+  
   return(e)
+}
+
+#' Output for only paired tests
+#' @param input taking the output of all statistical methods
+#' @return extacts p value of all paired tests and adds them to data.frame
+pairedTest <- function(input){
+  
+  welchT = welchTest(input)
+  shapiroT = shapiroTest(input)
+  corT = corTest(input)
+  chiT = chiSQTest(input)
+  manwiT = mannWhitTest(input) 
+  wilcoT = wilcoxonTest(input) 
+  anovaT = anovaTest(input)
+  
+  #create data.frame ordered by test function
+  
+  return(output)
+}
+
+#' Output for only un-paired tests
+#' @param input taking the output of all statistical methods
+#' @return extacts p value of all un-paired tests and adds them to data.frame
+unPairedTest <- function(input){
+  
+  welchT = welchTest(input)
+  shapiroT = shapiroTest(input)
+  corT = corTest(input)
+  chiT = chiSQTest(input)
+  manwiT = mannWhitTest(input) 
+  wilcoT = wilcoxonTest(input) 
+  anovaT = anovaTest(input)
+  
+  #create data.frame ordered by test function
+  
+  return(output)
+}
+
+#' P-value extractor function
+#' @param input taking the output of all statistical methods
+#' @return extacts p value and adds them to data.frame
+pValue <- function(input){
+  
+  welchT = welchTest(input)
+  shapiroT = shapiroTest(input)
+  corT = corTest(input)
+  chiT = chiSQTest(input)
+  manwiT = mannWhitTest(input) 
+  wilcoT = wilcoxonTest(input) 
+  anovaT = anovaTest(input)
+  
+  #create data.frame ordered by test function
+  
+  return(output)
 }
 
 #' Welchs T.Test
@@ -41,7 +95,7 @@ corTest <- function(input){
 #' Anova Test
 #' @param input A data.frame or data.table
 #' @return analyzes the variance of the given samples
-corTest <- function(input){
+anovaTest <- function(input){
   output = aov(input[[1]]~input[[2]])
   return(output)
 }
