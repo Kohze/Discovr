@@ -19,7 +19,6 @@ disc <- function(x,y){
 #' @return extacts p value of all paired tests and adds them to data.frame
 pairedTest <- function(input){
   
-  welchT = welchTest(input)
   shapiroT = shapiroTest(input)
   corT = corTest(input)
   chiT = chiSQTest(input)
@@ -41,8 +40,6 @@ unPairedTest <- function(input){
   shapiroT = shapiroTest(input)
   corT = corTest(input)
   chiT = chiSQTest(input)
-  manwiT = mannWhitTest(input) 
-  wilcoT = wilcoxonTest(input) 
   anovaT = anovaTest(input)
   
   #create data.frame ordered by test function
