@@ -4,12 +4,14 @@
 \alias{disc}
 \title{discovr() main code}
 \usage{
-disc(x, y)
+disc(x, method = "unpaired", preset = NULL)
 }
 \arguments{
 \item{x}{A data.frame or data.table}
 
-\item{y}{Additional options}
+\item{method}{The method indicates paired or un-paired testing}
+
+\item{preset}{As preset mutliple techniques are allowed, such as FACS or FRAP.}
 }
 \value{
 The calculation output

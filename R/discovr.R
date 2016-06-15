@@ -1,13 +1,24 @@
 #' discovr() main code
 #' @param x A data.frame or data.table
-#' @param y Additional options
+#' @param method The method indicates paired or un-paired testing
+#' @param preset As preset mutliple techniques are allowed, such as FACS or FRAP.
 #' @return The calculation output
 #' @export
-disc <- function(x,y){
+disc <- function(x, method = "unpaired", preset = NULL){
   method = as.character(y)
-  #if(method == "paired") pairedTest(x) else unPairedTest(x)
   input = as.data.frame(x)
   cols = length(input)
+  if(!is.null(application)) presetApp = as.character(preset)
+  
+  if(is.null(preset)){
+    if(method == "paired") pairedTest(x) else unPairedTest(x)
+  } else if(presetApp == "facs" | presetApp == "FACS") {
+    cat("performing FACS preset analysis")
+  } else if(presetApp == "frap" | presetApp == "FRAP") {
+    cat("performing FRAP preset analysis")
+  } else {
+    cat("performing FRAP preset analysis")
+  }
   
   e = shapiroTest(input)
   
