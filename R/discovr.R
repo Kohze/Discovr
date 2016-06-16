@@ -131,3 +131,11 @@ mannWhitTest <- function(input){
   output = wilcox.test(input[[1]],input[[2]], paired = FALSE)
   return(output)
 }
+
+#' PCA dimension reduction
+#' @param input A data.frame or data.table
+#' @return shows if datadimensionality can be reduced
+mannWhitTest <- function(input){
+  output = prcomp(input[[1]],input[[2]])
+  return(output)
+}
