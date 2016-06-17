@@ -1,9 +1,26 @@
 # Discovr Shiny application
 #
 library(shiny)
+library(data.table)
+library(Discovr)
 
 # Define server logic for random distribution application
 shinyServer(function(input, output) {
+
+  file <- reactive({
+    
+    inFile <- input$file
+    if (is.null(inFile)) {
+      return(NULL)
+    } else {
+      inFile %>%
+        rowwise() %>%
+        do({
+          fread(.$datapath, header = TRUE, data.table = FALSE)
+          
+        })
+    }
+  })
   
   # Reactive expression to generate the requested distribution. This is 
   # called whenever the inputs change. The output renderers defined 
@@ -36,8 +53,4 @@ shinyServer(function(input, output) {
     summary(data())
   })
   
-  # Generate an HTML table view of the data
-  output$table <- renderTable({
-    data.frame(x=data())
-  })
 })
