@@ -10,14 +10,20 @@ disc <- function(x, method = "unpaired", preset = NULL){
   cols = length(input)
   if(!is.null(application)) presetApp = as.character(preset)
   
-  if(is.null(preset)){
-    if(method == "paired") pairedTest(x) else unPairedTest(x)
-  } else if(presetApp == "facs" | presetApp == "FACS") {
-    cat("performing FACS preset analysis")
-  } else if(presetApp == "frap" | presetApp == "FRAP") {
-    cat("performing FRAP preset analysis")
+  if(cols == 2) {
+    if(is.null(preset)){
+      if(method == "paired") pairedTest(x) else unPairedTest(x)
+    } else if(presetApp == "facs" | presetApp == "FACS") {
+      cat("performing FACS preset analysis")
+    } else if(presetApp == "frap" | presetApp == "FRAP") {
+      cat("performing FRAP preset analysis")
+    } else {
+      cat("disc() input not recognized - check type errors")
+    }
+  } else if(cols > 2) {
+    cat("multi column analysis")
   } else {
-    cat("performing FRAP preset analysis")
+    cat("problem with data input")
   }
   
   e = shapiroTest(input)

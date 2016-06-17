@@ -7,10 +7,19 @@ Graphical clusters of a variety of statistical analysis methods
 Syntax
 --------------
 
-    disc(x, method = "unpaired", preset = NULL)
+    disc(x, method = "unpaired", preset = NULL, style = "heatmap")
 
 with x as data.frame or data.table. Method is either "paired" or "unpaired".
 
+
+Style
+--------------
+
+Different graphical styles will be available
+
+- Heatmap
+- Ternary Plot
+- Cleveland Dot Plot
 
 
 Presets
@@ -22,7 +31,7 @@ Presets for the following methods are available
 - FACS
 
 
-Statistical Test Included 
+Statistical Tests 
 --------------
 
 - Welchs T.Test
@@ -32,6 +41,8 @@ Statistical Test Included
 - Chi Square Test
 - Wilcoxon Test
 - Mann-Whitney U test
+- Principal Component Analysis
+- Bayes Random Tree
 
 
 Discovr Shiny App
