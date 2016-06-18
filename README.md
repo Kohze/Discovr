@@ -42,7 +42,8 @@ Statistical Tests
 - Wilcoxon Test
 - Mann-Whitney U test
 - Principal Component Analysis
-- Bayes Random Tree
+
+(- Bayes Random Tree)
 
 
 Discovr Shiny App
@@ -51,3 +52,16 @@ Discovr Shiny App
 The app serves as interactive tool to learn and understand
 the discovr syntax.
 
+
+Installation
+--------------
+    if (!require("devtools")) install.packages("devtools")
+    devtools::install_github("Kohze/Discovr")
+
+
+Example
+--------------
+
+After installation and library() call of Discovr, type in:
+
+    example(Discovr)
