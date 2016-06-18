@@ -1,14 +1,19 @@
-#' discovr() main code
+#' @title discovr() 
 #' @param x A data.frame or data.table
 #' @param method The method indicates paired or un-paired testing
 #' @param preset As preset mutliple techniques are allowed, such as FACS or FRAP.
 #' @return The calculation output
+#' @examples 
+#' library(Discovr)
+#' disc(mtcars[1:2])
 #' @export
 disc <- function(x, method = "unpaired", preset = NULL){
-  method = as.character(y)
+  method = as.character(method)
   input = as.data.frame(x)
   cols = length(input)
-  if(!is.null(application)) presetApp = as.character(preset)
+  if(!is.null(preset)) presetApp = as.character(preset)
+  
+  library(d3heatmap)
   
   if(cols == 2) {
     if(is.null(preset)){
@@ -26,9 +31,6 @@ disc <- function(x, method = "unpaired", preset = NULL){
     cat("problem with data input")
   }
   
-  e = shapiroTest(input)
-  
-  return(e)
 }
 
 #' Output for only paired tests
@@ -54,39 +56,35 @@ pairedTest <- function(input){
 unPairedTest <- function(input){
   
   welchT = welchTest(input)
-  shapiroT = shapiroTest(input)
+  #shapiroT = shapiroTest(input)
   corT = corTest(input)
   chiT = chiSQTest(input)
-  anovaT = anovaTest(input)
+  #anovaT = anovaTest(input)
+  
+  dataComp = data.frame()
+  dataComp[1,1] = welchT
+  dataComp[1,2] = corT
+  dataComp[1,3] = chiT
+  
+  dataComp[2,2] = welchT
+  dataComp[2,3] = corT
+  dataComp[2,1] = chiT
+  
+  colnames(dataComp) = c("Welch","Correlation","Chi Square")
+  output = dataComp
   
   #create data.frame ordered by test function
   
-  return(output)
+  return(d3heatmap(dataComp, theme = "dark", dendrogram = "none"))
 }
 
-#' P-value extractor function
-#' @param input taking the output of all statistical methods
-#' @return extacts p value and adds them to data.frame
-pValue <- function(input){
-  
-  welchT = welchTest(input)
-  shapiroT = shapiroTest(input)
-  corT = corTest(input)
-  chiT = chiSQTest(input)
-  manwiT = mannWhitTest(input) 
-  wilcoT = wilcoxonTest(input) 
-  anovaT = anovaTest(input)
-  
-  #create data.frame ordered by test function
-  
-  return(output)
-}
 
-#' Welchs T.Test
+#' Welchs two sample T.Test
 #' @param input A data.frame or data.table
 #' @return indicates whether parameter are from same population
 welchTest <- function(input){
   output = t.test(input[[1]],input[[2]])
+  output = output$p.value
   return(output)
 }
 
@@ -94,7 +92,8 @@ welchTest <- function(input){
 #' @param input A data.frame or data.table
 #' @return indicates normal distribution
 shapiroTest <- function(input){
-  output = c(shapiro.test(input[[1]]),shapiro.test(input[[2]]))
+  output = c(shapiro.test(input[[1]])$p.value,shapiro.test(input[[2]])$p.value)
+  output = mean(output)
   return(output)
 }
 
@@ -118,7 +117,7 @@ anovaTest <- function(input){
 #' @param input A data.frame or data.table
 #' @return analyzes goodness of fit of fittet line to dataset
 chiSQTest <- function(input){
-  output = chisq.test(input[[1]],input[[2]])
+  output = chisq.test(input[[1]],input[[2]])$p.value
   return(output)
 }
 

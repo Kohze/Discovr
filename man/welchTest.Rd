@@ -2,7 +2,7 @@
 % Please edit documentation in R/discovr.R
 \name{welchTest}
 \alias{welchTest}
-\title{Welchs T.Test}
+\title{Welchs two sample T.Test}
 \usage{
 welchTest(input)
 }
@@ -13,6 +13,6 @@ welchTest(input)
 indicates whether parameter are from same population
 }
 \description{
-Welchs T.Test
+Welchs two sample T.Test
 }
 

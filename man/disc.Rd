@@ -2,7 +2,7 @@
 % Please edit documentation in R/discovr.R
 \name{disc}
 \alias{disc}
-\title{discovr() main code}
+\title{discovr()}
 \usage{
 disc(x, method = "unpaired", preset = NULL)
 }
@@ -16,7 +16,8 @@ disc(x, method = "unpaired", preset = NULL)
 \value{
 The calculation output
 }
-\description{
-discovr() main code
+\examples{
+library(Discovr)
+disc(mtcars[1:2])
 }
 

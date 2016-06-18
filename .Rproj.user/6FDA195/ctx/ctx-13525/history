@@ -1,0 +1,85 @@
+library(Discovr)
+library(Discovr)
+method("test")
+methods("test")
+dir()
+tempdir()
+paste(tempdir(),"\\test"sep="")
+paste(tempdir(),"test"sep="\\")
+paste(tempdir(),"test",sep="\\")
+z = paste(tempdir(),"test",sep="\\")
+z
+paste(tempdir())
+library(Discovr)
+test = function(x,y = NULL) {
+if(is.null(y)){
+return(x)
+} else {
+return(x+y)
+}
+}
+test = function(x,y = 5) {
+if(is.null(y)){
+return(x)
+} else {
+return(x+y)
+}
+}
+test = function(x,y = 5) {
+if(is.null(y)){
+return(x)
+} else {
+return(x+y)
+}
+}
+test(3)
+test = function(x,y = 5) {
+if(y == 5{
+return(x)
+} else {
+return(x+y)
+}
+}
+test = function(x,y = 5) {
+if(y == 5){
+return(x)
+} else {
+return(x+y)
+}
+}
+test(3)
+test(3+4)
+test(3+6)
+test = function(x,y = 5) {
+if(y == 5){
+return(x+y)
+} else {
+return(x+y)
+}
+}
+test(3)
+test(4,5)
+test(4,6)
+library(Discovr)
+library(Discovr)
+library(Discovr)
+library(Discovr)
+library(d3heatmap)
+mtcars
+d3heatmap(mtcars)
+disc(mtcars[1:2])
+disc(mtcars[1:2])
+disc(mtcars[1:2])
+library(Discovr)
+disc(mtcars[1:2])
+library(Discovr)
+disc(mtcars[1:2])
+library(Discovr)
+disc(mtcars[1:2])
+library(Discovr)
+disc(mtcars[1:2])
+?disc
+library(Discovr)
+?disc
+?discovr
+?Discovr
