@@ -3,6 +3,8 @@ Graphical clusters of a variety of statistical analysis methods
    
     http://vaionex.com/discovr/
 
+![alt tag](http://vaionex.com/rob/Discovr/output_14G9Da.gif)
+
 
 Syntax
 --------------
