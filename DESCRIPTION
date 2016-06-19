@@ -11,5 +11,3 @@ Collate:
     'statisticFun.R'
     'graphics.R'
     'discovr.R'
-    'ggTransfer.R'
-    'test.R'
