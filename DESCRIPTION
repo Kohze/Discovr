@@ -8,6 +8,8 @@ License: MIT
 LazyData: true
 RoxygenNote: 5.0.1
 Collate:
-    'test.R'
+    'statisticFun.R'
+    'graphics.R'
     'discovr.R'
     'ggTransfer.R'
+    'test.R'
