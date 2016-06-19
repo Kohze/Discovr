@@ -1,5 +1,12 @@
 # Discovr
-Graphical clusters of a variety of statistical analysis methods
+Graphical clusters of a variety of statistical analysis methods (work in progress)
+
+The discovr package will enable a fast and efficient way to test the most common statistical analysis methods. It will therefore allow users to quickly check method specific indicators for the viability of a given method. Thereby, it will reduce the trial and error approach R user yet approach most datasets. At the same time, it will increase the use of the full spectrum of statistical methods.
+
+
+
+Overview
+--------------
    
     http://vaionex.com/discovr/
 
@@ -52,7 +59,7 @@ Discovr Shiny App
 --------------
 
 The app serves as interactive tool to learn and understand
-the discovr syntax.
+the discovr syntax. (work in progress)
 
 
 Installation
