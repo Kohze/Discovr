@@ -1,7 +1,8 @@
 #' @title discovr() 
 #' @param x A data.frame or data.table
-#' @param method The method indicates paired or un-paired testing
-#' @param preset As preset mutliple techniques are allowed, such as FACS or FRAP.
+#' @param method The method indicates "paired" or "unpaired" testing
+#' @param preset As preset mutliple techniques are allowed, such as "FACS" or "FRAP".
+#' @param style A style input such as "heatmap" / "cleveland" / "ternary" 
 #' @return The calculation output
 #' @include graphics.R
 #' @include statisticFun.R
@@ -71,6 +72,7 @@ unPairedTest <- function(input){
   dataComp[1,2] = corT
   dataComp[1,3] = chiT
   
+  #just some added columns as space filler for now
   dataComp[2,2] = welchT
   dataComp[2,3] = corT
   dataComp[2,1] = chiT

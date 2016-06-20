@@ -12,6 +12,7 @@ Overview
 
 ![alt tag](http://vaionex.com/rob/Discovr/output_14G9Da.gif)
 
+note: The gif only shows 6 heatmap fields - the end result will have ~20-25. Additionally the interactive map will not display the row/column but the related test for each heatmap field. 
 
 Syntax
 --------------
