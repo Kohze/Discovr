@@ -9,9 +9,11 @@ disc(x, method = "unpaired", preset = NULL, style = "heatmap")
 \arguments{
 \item{x}{A data.frame or data.table}
 
-\item{method}{The method indicates paired or un-paired testing}
+\item{method}{The method indicates "paired" or "unpaired" testing}
 
-\item{preset}{As preset mutliple techniques are allowed, such as FACS or FRAP.}
+\item{preset}{As preset mutliple techniques are allowed, such as "FACS" or "FRAP".}
+
+\item{style}{A style input such as "heatmap" / "cleveland" / "ternary"}
 }
 \value{
 The calculation output

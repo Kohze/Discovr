@@ -66,3 +66,11 @@ mannWhitTest <- function(input){
   output = prcomp(input[[1]],input[[2]])
   return(output)
 }
+
+#' F-Test
+#' @param input A data.frame or data.table
+#' @return compares variances of the samples - only normal distribution
+fTest <- function(input){
+  output = var.test(input[[1]],input[[2]])$p.value
+  return(output)
+}
