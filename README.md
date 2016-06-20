@@ -52,6 +52,7 @@ Statistical Tests
 - Wilcoxon Test
 - Mann-Whitney U test
 - Principal Component Analysis
+- F-test
 
 (- Bayes Random Tree)
 
