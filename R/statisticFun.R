@@ -74,3 +74,11 @@ fTest <- function(input){
   output = var.test(input[[1]],input[[2]])$p.value
   return(output)
 }
+
+#' GLM
+#' @param input A data.frame or data.table
+#' @return generalized linear model
+fTest <- function(input){
+  output = glm(input[[1]]~input[[2]])
+  return(output)
+}

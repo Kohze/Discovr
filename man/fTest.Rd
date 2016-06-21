@@ -5,14 +5,22 @@
 \title{F-Test}
 \usage{
 fTest(input)
+
+fTest(input)
 }
 \arguments{
+\item{input}{A data.frame or data.table}
+
 \item{input}{A data.frame or data.table}
 }
 \value{
 compares variances of the samples - only normal distribution
+
+generalized linear model
 }
 \description{
 F-Test
+
+GLM
 }
 
