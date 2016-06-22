@@ -10,6 +10,9 @@ plotFun <- function(input, style){
     cat("placeholder: ternary plot")
   } else if(style == "cleveland") {
     cat("placeholder: cleveland plot")
+    dotchart(input,labels=row.names(input),cex=.7,
+             main="Method viability", 
+             xlab="P values of tested methods")
   } else {
     cat("error: check your style input again")
   }
