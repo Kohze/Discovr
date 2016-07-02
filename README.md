@@ -3,7 +3,6 @@ Graphical clusters of a variety of statistical analysis methods (work in progres
 
 The discovr package will enable a fast and efficient way to test the most common statistical analysis methods. It will therefore allow users to quickly check method specific indicators for the viability of a given method. Thereby, it will reduce the trial and error approach R user yet approach most datasets. At the same time, it will increase the use of the full spectrum of statistical methods.
 
-#Note: We are now designing a costumized d3.js output with our own d3.js syntax. The next major update there is expected at the 30th of june.
 
 Overview
 --------------
