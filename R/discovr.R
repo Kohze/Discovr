@@ -17,6 +17,7 @@ disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
   if(!is.null(preset)) presetApp = as.character(preset)
   
   library(d3heatmap)
+  library(future)
   
   if(cols == 2) {
     if(is.null(preset)){
@@ -44,12 +45,12 @@ disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
 #' @return extacts p value of all paired tests and adds them to data.frame
 pairedTest <- function(input){
   
-  shapiroT = shapiroTest(input)
-  corT = corTest(input)
-  chiT = chiSQTest(input)
-  manwiT = mannWhitTest(input) 
-  wilcoT = wilcoxonTest(input) 
-  anovaT = anovaTest(input)
+  shapiroT %<-% shapiroTest(input)
+  corT %<-% corTest(input)
+  chiT %<-% chiSQTest(input)
+  manwiT %<-% mannWhitTest(input) 
+  wilcoT %<-% wilcoxonTest(input) 
+  anovaT %<-% anovaTest(input)
   
   #create data.frame ordered by test function
   
@@ -61,10 +62,10 @@ pairedTest <- function(input){
 #' @return extacts p value of all un-paired tests and adds them to data.frame
 unPairedTest <- function(input){
   
-  welchT = welchTest(input)
+  welchT %<-% welchTest(input)
   #shapiroT = shapiroTest(input)
-  corT = corTest(input)
-  chiT = chiSQTest(input)
+  corT %<-% corTest(input)
+  chiT %<-% chiSQTest(input)
   #anovaT = anovaTest(input)
   
   dataComp = data.frame()
@@ -85,3 +86,4 @@ unPairedTest <- function(input){
   return(output)
 }
 
+#test
