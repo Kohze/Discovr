@@ -37,7 +37,9 @@ disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
   
   if(exists("data")){
     plotFun(data,style)
-  }
+  } else { return("sry something went wront")}
+
+  
 }
 
 #' Output for only paired tests
@@ -69,12 +71,12 @@ unPairedTest <- function(input){
   #anovaT = anovaTest(input)
   
   dataComp = data.frame()
-  dataComp[1,1] = welchT
+  dataComp[1,1] = welchT$p.value
   dataComp[1,2] = corT
   dataComp[1,3] = chiT
   
   #just some added columns as space filler for now
-  dataComp[2,2] = welchT
+  dataComp[2,2] = welchT$p.value
   dataComp[2,3] = corT
   dataComp[2,1] = chiT
   
@@ -85,5 +87,3 @@ unPairedTest <- function(input){
   
   return(output)
 }
-
-#test

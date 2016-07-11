@@ -6,7 +6,6 @@
 #' @return indicates whether parameter are from same population
 welchTest <- function(input){
   output = t.test(input[[1]],input[[2]])
-  output = output$p.value
   return(output)
 }
 
@@ -71,7 +70,7 @@ mannWhitTest <- function(input){
 #' @param input A data.frame or data.table
 #' @return compares variances of the samples - only normal distribution
 fTest <- function(input){
-  output = var.test(input[[1]],input[[2]])$p.value
+  output = var.test(input[[1]],input[[2]])
   return(output)
 }
 
