@@ -6,6 +6,7 @@
 #' @return The calculation output
 #' @include graphics.R
 #' @include statisticFun.R
+#' @import future
 #' @examples 
 #' library(Discovr)
 #' disc(mtcars[1:2])
@@ -17,7 +18,7 @@ disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
   if(!is.null(preset)) presetApp = as.character(preset)
   
   library(d3heatmap)
-  library(future)
+#  library(future)
   
   if(cols == 2) {
     if(is.null(preset)){

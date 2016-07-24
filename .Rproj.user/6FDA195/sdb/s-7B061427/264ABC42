@@ -1,12 +1,12 @@
 {
     "collab_server" : "",
     "contents" : "#' Graphical Output\n#' @param input taking the output of all statistical methods\n#' @include discovr.R\n#' @return returns Graphical output\nplotFun <- function(input, style){\n  \n  if(style == \"heatmap\"){\n    return(d3heatmap(input, theme = \"dark\", dendrogram = \"none\"))\n  } else if(style == \"ternary\") {\n    cat(\"placeholder: ternary plot\")\n  } else if(style == \"cleveland\") {\n    cat(\"placeholder: cleveland plot\")\n    dotchart(input,labels=row.names(input),cex=.7,\n             main=\"Method viability\", \n             xlab=\"P values of tested methods\")\n  } else {\n    cat(\"error: check your style input again\")\n  }\n}",
-    "created" : 1468239555052.000,
+    "created" : 1469396117724.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
     "hash" : "1709922995",
-    "id" : "8876E7FB",
+    "id" : "264ABC42",
     "lastKnownWriteTime" : 1466630427,
     "last_content_update" : 1466630427,
     "path" : "~/Discovr/R/graphics.R",
@@ -14,7 +14,7 @@
     "properties" : {
         "tempName" : "Untitled1"
     },
-    "relative_order" : 2,
+    "relative_order" : 1,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "r_source"
