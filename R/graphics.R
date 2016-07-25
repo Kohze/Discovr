@@ -7,9 +7,10 @@ plotFun <- function(input, style){
   if(style == "heatmap"){
     return(d3heatmap(input, theme = "dark", dendrogram = "none"))
   } else if(style == "ternary") {
-    cat("placeholder: ternary plot")
+    cat("ternary plot")
+    ggplot() + coord_tern()
   } else if(style == "cleveland") {
-    cat("placeholder: cleveland plot")
+    cat("cleveland plot")
     dotchart(input,labels=row.names(input),cex=.7,
              main="Method viability", 
              xlab="P values of tested methods")

@@ -7,6 +7,7 @@
 #' @include graphics.R
 #' @include statisticFun.R
 #' @import future
+#' @import ggtern
 #' @examples 
 #' library(Discovr)
 #' disc(mtcars[1:2])
