@@ -39,7 +39,7 @@ disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
   
   if(exists("data")){
     plotFun(data,style)
-  } else { return("sry something went wront")}
+  } else {return("sry something went wront")}
 
   
 }
@@ -86,6 +86,27 @@ unPairedTest <- function(input){
   output = dataComp
   
   #create data.frame ordered by test function
+  
+  return(output)
+}
+
+#' @title disc.normal() 
+#' @param x A data.frame or data.table
+#' @return showing shapiro.test output of the data.frame
+#' @export
+
+
+disc.normal <- function(x){
+  data = lapply(x, shapiro.test)
+  pval = c()
+  for(i in 1:length(names(data))){
+    pval = c(pval,data[[names(data)[i]]]$p.value)
+  }
+  
+  nameColumn = names(x)
+  output = list("pvalue" = pval, "nameColumn" = nameColumn)
+  
+  #call d3.js graphic function via htmlwidgets here
   
   return(output)
 }
