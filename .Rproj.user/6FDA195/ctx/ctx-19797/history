@@ -1,0 +1,155 @@
+library(Discovr)
+library(Discovr)
+method("test")
+methods("test")
+dir()
+tempdir()
+paste(tempdir(),"\\test"sep="")
+paste(tempdir(),"test"sep="\\")
+paste(tempdir(),"test",sep="\\")
+z = paste(tempdir(),"test",sep="\\")
+z
+paste(tempdir())
+library(Discovr)
+test = function(x,y = NULL) {
+if(is.null(y)){
+return(x)
+} else {
+return(x+y)
+}
+}
+test = function(x,y = 5) {
+if(is.null(y)){
+return(x)
+} else {
+return(x+y)
+}
+}
+test = function(x,y = 5) {
+if(is.null(y)){
+return(x)
+} else {
+return(x+y)
+}
+}
+test(3)
+test = function(x,y = 5) {
+if(y == 5{
+return(x)
+} else {
+return(x+y)
+}
+}
+test = function(x,y = 5) {
+if(y == 5){
+return(x)
+} else {
+return(x+y)
+}
+}
+test(3)
+test(3+4)
+test(3+6)
+test = function(x,y = 5) {
+if(y == 5){
+return(x+y)
+} else {
+return(x+y)
+}
+}
+test(3)
+test(4,5)
+test(4,6)
+library(Discovr)
+library(Discovr)
+library(Discovr)
+a = mtcars[1:2]
+var.test(a)
+var.test(a[1],a[2])
+var.test(a[[1]],a[[2]])
+b = var.test(a[[1]],a[[2]])
+b$p.value
+library(Discovr)
+install.packages("htmlwidgets")
+library(htmlwidgets)
+?htmlwidgets
+vignette("htmlwidgets-intro")
+devtools::create("mywidget")
+setwd("mywidget")
+htmlwidgets::scaffoldWidget("mywidget")
+devtools::create("mywidget")
+setwd("mywidget")
+htmlwidgets::scaffoldWidget("mywidget")
+devtools::install()
+library(mywidget)
+mywidget("hello, world")
+system("pwd")
+library(data.table)
+shiny::runApp('ShinyDiscovr')
+runApp('ShinyDiscovr')
+alpha = data.frame(c(1,2,6,3,4,8))
+sum alpha$c.1..2..6..3..4..8.
+sum(alpha$c.1..2..6..3..4..8.)
+rep(1:5)
+rep(1:5,2)
+rep(1:5:2)
+1:6:2
+rep(1:5,by = 2)
+rep(1:6,by = 2)
+seq(0,10,2)
+sum(seq(0,10,2))
+a = function(x){}
+a = c(1,2,3,4,5,6)
+a[6:1]
+rev(a)
+cov(mtcars, use="complete.obs")
+cov(mtcars)
+cor(mtcars, use="complete.obs", method="kendall")
+cov(mtcars)
+cor(mtcars, use="complete.obs", method="kendall")
+cov(mtcars, use="complete.obs", method="kendall")
+cov(mtcars, use="complete.obs")
+#make up some data
+x <- 10; y <- 10; g <- 5
+set.seed(1969)
+dat <- matrix(rnorm((x + y) * g), ncol = x + y)
+# apply() the t.test function to each row fo the matrix and extract
+just the p value
+results <- apply(dat, 1, function(dat) {
+t.test(x = dat[1:x], y = dat[(x + 1):(x + y)])$p.value})
+# if you want, you can bind p-values back into the matrix
+cbind(dat, pvals = results)
+dat <- matrix(rnorm((x + y) * g), ncol = x + y)
+data
+dat
+install.packages("pi0")
+library(pi0)
+set.seed(9992722)
+dat=matrix(rnorm(30),3,10)
+(pvals=matrix.t.test(dat,1,5,5)) # [1] 0.2112825 0.8366920 0.2891014
+(pvals2=apply(dat,1,function(xx)t.test(xx[1:5],xx[6:10],var.equal=TRUE)$p.val))
+all.equal(pvals,pvals2) ## TRUE
+p.mat<-multi.ttest(mtcars[,1:7])
+multi.ttest <- function(mat, ...) {
+mat <- as.matrix(mat)
+n <- ncol(mat)
+p.mat<- matrix(NA, n, n)
+diag(p.mat) <- 1
+for (i in 1:(n - 1)) {
+for (j in (i + 1):n) {
+test <- t.test(mat[, i], mat[, j], ...)
+p.mat[i, j] <- p.mat[j, i] <- test$p.value
+}
+}
+colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+signif(p.mat,4)
+}
+p.mat<-multi.ttest(mtcars[,1:7])
+p.mat
+cor(mtcars, use = "complete.obs", method = "kendall")
+cor(mtcars, use = "complete.obs")
+cor(mtcars, use = "complete.obs", na.rm = TRUE)
+cor(mtcars, use = "complete.obs")
+varTest = var(mtcars, na.rm = TRUE)
+varTest
+library(Discovr)

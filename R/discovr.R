@@ -33,6 +33,7 @@ disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
     }
   } else if(cols > 2) {
     cat("multi column analysis")
+    data = multicol(data)
   } else {
     cat("problem with data input")
   }
@@ -90,12 +91,24 @@ unPairedTest <- function(input){
   return(output)
 }
 
+#' @title multicol
+#' @param x A data.frame or data.table
+#' @return performing muliple calculations on a data frame with multiple columns
+
+multicol <- function(x){
+  shapiroTest = disc.normal(x)
+  corTest = cor(x, use = "complete.obs") 
+  varTest = var(x, na.rm = TRUE)
+  matrixttest = t.test.matrix(x)
+  
+  output = list("t.test" = matrixttest, "correlation" = corTest, "variance" = varTest, "shapiro" = shapiroTest)
+  return(output)
+}
+
 #' @title disc.normal() 
 #' @param x A data.frame or data.table
 #' @return showing shapiro.test output of the data.frame
-#' @export
-
-
+#' 
 disc.normal <- function(x){
   data = lapply(x, shapiro.test)
   pval = c()
@@ -109,4 +122,23 @@ disc.normal <- function(x){
   #call d3.js graphic function via htmlwidgets here
   
   return(output)
+}
+
+#' @title t-test matrix function 
+#' @param x A data.frame or data.table
+#' @return returns the p value matrix of t.tests
+#' this code function was found at http://www.sthda.com/english/wiki/matrix-of-student-t-test
+t.test.matrix <- function(mat, ...) {
+  mat <- as.matrix(mat)
+  n = ncol(mat)
+  p.mat = matrix(NA, n, n)
+  diag(p.mat) = 1
+  for (i in 1:(n - 1)) {
+    for (j in (i + 1):n) {
+      test = t.test(mat[, i], mat[, j], ...)
+      p.mat[i, j] <- p.mat[j, i] <- test$p.value
+    }
+  }
+  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+  signif(p.mat,3)
 }
