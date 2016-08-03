@@ -19,7 +19,7 @@ disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
   if(!is.null(preset)) presetApp = as.character(preset)
   
   library(d3heatmap)
-#  library(future)
+  library(future)
   
   if(cols == 2) {
     if(is.null(preset)){

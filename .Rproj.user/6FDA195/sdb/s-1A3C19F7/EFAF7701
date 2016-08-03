@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Statistical Functions\n#' @include discovr.R\n\n#' Welchs two sample T.Test\n#' @param input A data.frame or data.table\n#' @return indicates whether parameter are from same population\nwelchTest <- function(input){\n  output = t.test(input[[1]],input[[2]])\n  return(output)\n}\n\n#' Shapiro Wilks Test\n#' @param input A data.frame or data.table\n#' @return indicates normal distribution\nshapiroTest <- function(input){\n  output = c(shapiro.test(input[[1]])$p.value,shapiro.test(input[[2]])$p.value)\n  output = mean(output)\n  return(output)\n}\n\n#' Correlation Test\n#' @param input A data.frame or data.table\n#' @return indicates correlation between parameters\ncorTest <- function(input){\n  output = cor(input[[1]],input[[2]])\n  return(output)\n}\n\n#' Anova Test\n#' @param input A data.frame or data.table\n#' @return analyzes the variance of the given samples\nanovaTest <- function(input){\n  output = aov(input[[1]]~input[[2]])\n  return(output)\n}\n\n#' Chi Square Test\n#' @param input A data.frame or data.table\n#' @return analyzes goodness of fit of fittet line to dataset\nchiSQTest <- function(input){\n  output = chisq.test(input[[1]],input[[2]])$p.value\n  return(output)\n}\n\n#' Wilcoxon Test\n#' @param input A data.frame or data.table\n#' @return Alternative test for the paired t-test if data is not normal - on dependend samples\nwilcoxonTest <- function(mat, ...) {\n  mat <- as.matrix(mat)\n  n = ncol(mat)\n  p.mat = matrix(NA, n, n)\n  diag(p.mat) = 1\n  for (i in 1:(n - 1)) {\n    for (j in (i + 1):n) {\n      test = wilcox.test(mat[, i], mat[, j], ..., paired = TRUE)\n      p.mat[i, j] <- p.mat[j, i] <- test$p.value\n    }\n  }\n  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)\n  signif(p.mat,3)\n}\n\n#' Mann-Whitney U test - Wilcoxon sum rank test\n#' @param input A data.frame or data.table\n#' @return Alternative test for the paired t-test if data is not normal - on independent samples\nmannWhitTest <- function(mat, ...) {\n  mat <- as.matrix(mat)\n  n = ncol(mat)\n  p.mat = matrix(NA, n, n)\n  diag(p.mat) = 1\n  for (i in 1:(n - 1)) {\n    for (j in (i + 1):n) {\n      test = wilcox.test(mat[, i], mat[, j], ..., paired = FALSE)\n      p.mat[i, j] <- p.mat[j, i] <- test$p.value\n    }\n  }\n  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)\n  signif(p.mat,3)\n}\n\n#' PCA dimension reduction\n#' @param input A data.frame or data.table\n#' @return shows if datadimensionality can be reduced\npcaReduce <- function(input){\n  output = prcomp(input[[1]],input[[2]])\n  return(output)\n}\n\n#' F-Test\n#' @param input A data.frame or data.table\n#' @return compares variances of the samples - only normal distribution\nfTest <- function(input){\n  output = var.test(input[[1]],input[[2]])\n  return(output)\n}\n\n#' GLM\n#' @param input A data.frame or data.table\n#' @return generalized linear model\nfTest <- function(input){\n  output = glm(input[[1]]~input[[2]])\n  return(output)\n}",
+    "created" : 1469555525723.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2155707155",
+    "id" : "EFAF7701",
+    "lastKnownWriteTime" : 1470260958,
+    "last_content_update" : 1470260958567,
+    "path" : "~/Discovr/R/statisticFun.R",
+    "project_path" : "R/statisticFun.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

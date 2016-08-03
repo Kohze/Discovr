@@ -45,23 +45,43 @@ chiSQTest <- function(input){
 #' Wilcoxon Test
 #' @param input A data.frame or data.table
 #' @return Alternative test for the paired t-test if data is not normal - on dependend samples
-wilcoxonTest <- function(input){
-  output = wilcox.test(input[[1]],input[[2]], paired = TRUE)
-  return(output)
+wilcoxonTest <- function(mat, ...) {
+  mat <- as.matrix(mat)
+  n = ncol(mat)
+  p.mat = matrix(NA, n, n)
+  diag(p.mat) = 1
+  for (i in 1:(n - 1)) {
+    for (j in (i + 1):n) {
+      test = wilcox.test(mat[, i], mat[, j], ..., paired = TRUE)
+      p.mat[i, j] <- p.mat[j, i] <- test$p.value
+    }
+  }
+  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+  signif(p.mat,3)
 }
 
 #' Mann-Whitney U test - Wilcoxon sum rank test
 #' @param input A data.frame or data.table
 #' @return Alternative test for the paired t-test if data is not normal - on independent samples
-mannWhitTest <- function(input){
-  output = wilcox.test(input[[1]],input[[2]], paired = FALSE)
-  return(output)
+mannWhitTest <- function(mat, ...) {
+  mat <- as.matrix(mat)
+  n = ncol(mat)
+  p.mat = matrix(NA, n, n)
+  diag(p.mat) = 1
+  for (i in 1:(n - 1)) {
+    for (j in (i + 1):n) {
+      test = wilcox.test(mat[, i], mat[, j], ..., paired = FALSE)
+      p.mat[i, j] <- p.mat[j, i] <- test$p.value
+    }
+  }
+  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+  signif(p.mat,3)
 }
 
 #' PCA dimension reduction
 #' @param input A data.frame or data.table
 #' @return shows if datadimensionality can be reduced
-mannWhitTest <- function(input){
+pcaReduce <- function(input){
   output = prcomp(input[[1]],input[[2]])
   return(output)
 }

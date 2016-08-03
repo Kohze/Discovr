@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "fTest <- function(mat, ...) {\n  mat <- as.matrix(mat)\n  n = ncol(mat)\n  p.mat = matrix(NA, n, n)\n  diag(p.mat) = 1\n  for (i in 1:(n - 1)) {\n    for (j in (i + 1):n) {\n      test = glm(mat[, i], mat[, j], ...)\n      p.mat[i, j] <- p.mat[j, i] <- test$p.value\n    }\n  }\n  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)\n  signif(p.mat,3)\n}",
+    "created" : 1470260505056.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "932485458",
+    "id" : "29A8979B",
+    "lastKnownWriteTime" : 32651569751457901,
+    "last_content_update" : 1470260926816,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

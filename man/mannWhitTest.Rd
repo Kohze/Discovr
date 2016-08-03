@@ -4,23 +4,15 @@
 \alias{mannWhitTest}
 \title{Mann-Whitney U test - Wilcoxon sum rank test}
 \usage{
-mannWhitTest(input)
-
-mannWhitTest(input)
+mannWhitTest(mat, ...)
 }
 \arguments{
-\item{input}{A data.frame or data.table}
-
 \item{input}{A data.frame or data.table}
 }
 \value{
 Alternative test for the paired t-test if data is not normal - on independent samples
-
-shows if datadimensionality can be reduced
 }
 \description{
 Mann-Whitney U test - Wilcoxon sum rank test
-
-PCA dimension reduction
 }
 
