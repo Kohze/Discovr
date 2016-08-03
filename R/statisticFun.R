@@ -82,7 +82,8 @@ mannWhitTest <- function(mat, ...) {
 #' @param input A data.frame or data.table
 #' @return shows if datadimensionality can be reduced
 pcaReduce <- function(input){
-  output = prcomp(input[[1]],input[[2]])
+  pc = prcomp(x = mtcars, scale. = TRUE)
+  output = length(which(pc$sdev > 0.5))/length(pc$sdev)
   return(output)
 }
 
