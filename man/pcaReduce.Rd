@@ -11,6 +11,7 @@ pcaReduce(input)
 }
 \value{
 shows if datadimensionality can be reduced
+indicates which percentage of all principal components that have a sigma value > 0.5
 }
 \description{
 PCA dimension reduction

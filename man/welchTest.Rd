@@ -4,13 +4,14 @@
 \alias{welchTest}
 \title{Statistical Functions}
 \usage{
-welchTest(input)
+welchTest(mat, ...)
 }
 \arguments{
 \item{input}{A data.frame or data.table}
 }
 \value{
 indicates whether parameter are from same population
+the logic of the function syntax was fount at http://www.sthda.com/english/wiki/matrix-of-student-t-test
 }
 \description{
 Statistical Functions

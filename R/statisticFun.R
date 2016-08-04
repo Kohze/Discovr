@@ -4,9 +4,20 @@
 #' Welchs two sample T.Test
 #' @param input A data.frame or data.table
 #' @return indicates whether parameter are from same population
-welchTest <- function(input){
-  output = t.test(input[[1]],input[[2]])
-  return(output)
+#' the logic of the function syntax was fount at http://www.sthda.com/english/wiki/matrix-of-student-t-test
+welchTest <- function(mat, ...) {
+  mat <- as.matrix(mat)
+  n = ncol(mat)
+  p.mat = matrix(NA, n, n)
+  diag(p.mat) = 1
+  for (i in 1:(n - 1)) {
+    for (j in (i + 1):n) {
+      test = t.test(mat[, i], mat[, j], ...)
+      p.mat[i, j] <- p.mat[j, i] <- test$p.value
+    }
+  }
+  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+  signif(p.mat,3)
 }
 
 #' Shapiro Wilks Test
@@ -37,9 +48,19 @@ anovaTest <- function(input){
 #' Chi Square Test
 #' @param input A data.frame or data.table
 #' @return analyzes goodness of fit of fittet line to dataset
-chiSQTest <- function(input){
-  output = chisq.test(input[[1]],input[[2]])$p.value
-  return(output)
+chiSQTest <- function(mat, ...) {
+  mat <- as.matrix(mat)
+  n = ncol(mat)
+  p.mat = matrix(NA, n, n)
+  diag(p.mat) = 1
+  for (i in 1:(n - 1)) {
+    for (j in (i + 1):n) {
+      test = chisq.test(mat[, i], mat[, j])
+      p.mat[i, j] <- p.mat[j, i] <- test$p.value
+    }
+  }
+  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+  signif(p.mat,3)
 }
 
 #' Wilcoxon Test
@@ -81,6 +102,7 @@ mannWhitTest <- function(mat, ...) {
 #' PCA dimension reduction
 #' @param input A data.frame or data.table
 #' @return shows if datadimensionality can be reduced
+#' indicates which percentage of all principal components that have a sigma value > 0.5
 pcaReduce <- function(input){
   pc = prcomp(x = mtcars, scale. = TRUE)
   output = length(which(pc$sdev > 0.5))/length(pc$sdev)
@@ -90,15 +112,26 @@ pcaReduce <- function(input){
 #' F-Test
 #' @param input A data.frame or data.table
 #' @return compares variances of the samples - only normal distribution
-fTest <- function(input){
-  output = var.test(input[[1]],input[[2]])
-  return(output)
+fTest <- function(mat, ...) {
+  mat <- as.matrix(mat)
+  n = ncol(mat)
+  p.mat = matrix(NA, n, n)
+  diag(p.mat) = 1
+  for (i in 1:(n - 1)) {
+    for (j in (i + 1):n) {
+      test = var.test(mat[, i], mat[, j])
+      test = as.numeric(test$statistic)
+      p.mat[i, j] <- p.mat[j, i] <- test
+    }
+  }
+  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+  signif(p.mat,3)
 }
 
 #' GLM
 #' @param input A data.frame or data.table
 #' @return generalized linear model
-fTest <- function(input){
+glmTest <- function(input){
   output = glm(input[[1]]~input[[2]])
   return(output)
 }

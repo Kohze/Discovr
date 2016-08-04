@@ -124,21 +124,3 @@ disc.normal <- function(x){
   return(output)
 }
 
-#' @title t-test matrix function 
-#' @param x A data.frame or data.table
-#' @return returns the p value matrix of t.tests
-#' this code function was found at http://www.sthda.com/english/wiki/matrix-of-student-t-test
-t.test.matrix <- function(mat, ...) {
-  mat <- as.matrix(mat)
-  n = ncol(mat)
-  p.mat = matrix(NA, n, n)
-  diag(p.mat) = 1
-  for (i in 1:(n - 1)) {
-    for (j in (i + 1):n) {
-      test = t.test(mat[, i], mat[, j], ...)
-      p.mat[i, j] <- p.mat[j, i] <- test$p.value
-    }
-  }
-  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
-  signif(p.mat,3)
-}
