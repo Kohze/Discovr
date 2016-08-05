@@ -1,6 +1,5 @@
 #' Statistical Functions
 #' @include discovr.R
-
 #' Welchs two sample T.Test
 #' @param input A data.frame or data.table
 #' @return indicates whether parameter are from same population
@@ -33,16 +32,26 @@ shapiroTest <- function(input){
 #' @param input A data.frame or data.table
 #' @return indicates correlation between parameters
 corTest <- function(input){
-  output = cor(input[[1]],input[[2]])
+  output = cor(input, use = "complete.obs")
   return(output)
 }
 
 #' Anova Test
 #' @param input A data.frame or data.table
 #' @return analyzes the variance of the given samples
-anovaTest <- function(input){
-  output = aov(input[[1]]~input[[2]])
-  return(output)
+anovaTest <- function(mat, ...) {
+  mat <- as.matrix(mat)
+  n = ncol(mat)
+  p.mat = matrix(NA, n, n)
+  diag(p.mat) = 1
+  for (i in 1:(n - 1)) {
+    for (j in (i + 1):n) {
+      test = aov(mat[, i] ~ mat[, j])
+      p.mat[i, j] <- p.mat[j, i] <- test$coefficients[2]
+    }
+  }
+  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+  signif(p.mat,3)
 }
 
 #' Chi Square Test
@@ -132,6 +141,16 @@ fTest <- function(mat, ...) {
 #' @param input A data.frame or data.table
 #' @return generalized linear model
 glmTest <- function(input){
-  output = glm(input[[1]]~input[[2]])
+  formVec = c()
+  for(i in 2:length(input)) {
+    if(i == 2){
+      formVec = paste0("input[[",i,"]]")
+    } else { 
+      formVec = paste0(formVec, " + ", "input[[",i,"]]")
+    }
+  }
+  formOut = as.formula(paste0("input[[1]] ~ ", formVec))
+  output = glm(formOut)
+  output = output$coefficients
   return(output)
 }

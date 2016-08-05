@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "\nglmTest <- function(input){\n  formVec = c()\n  for(i in 2:length(input)) {\n    if(i == 2){\n        formVec = paste0(\"input[[\",i,\"]]\")\n      } else { \n        formVec = paste0(formVec, \" + \", \"input[[\",i,\"]]\")\n      }\n  }\n  formOut = as.formula(paste0(\"input[[1]] ~ \", formVec))\n  output = glm(formOut)\n  output = output$coefficients\n  return(output)\n}",
+    "created" : 1470432141680.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "606553307",
+    "id" : "5F5B77E3",
+    "lastKnownWriteTime" : 2484628536874007931,
+    "last_content_update" : 1470433696137,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
