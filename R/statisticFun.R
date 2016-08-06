@@ -22,9 +22,13 @@ welchTest <- function(mat, ...) {
 #' Shapiro Wilks Test
 #' @param input A data.frame or data.table
 #' @return indicates normal distribution
-shapiroTest <- function(input){
-  output = c(shapiro.test(input[[1]])$p.value,shapiro.test(input[[2]])$p.value)
-  output = mean(output)
+shapiroT <- function(x){
+  resultVec = c()
+  shapTest = lapply(x, shapiro.test)
+  for(i in 1:length(x)){
+    resultVec = c(resultVec, shapTest[[i]]$p.value)
+  }
+  output = data.frame(names(x),resultVec)
   return(output)
 }
 
