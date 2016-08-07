@@ -21,35 +21,36 @@ disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
   library(d3heatmap)
   library(future)
   
-  if(cols == 2) {
-    if(is.null(preset)){
-      if(method == "paired") data = pairedTest(x) else data = unPairedTest(x)
-    } else if(presetApp == "facs" | presetApp == "FACS") {
-      cat("performing FACS preset analysis")
-    } else if(presetApp == "frap" | presetApp == "FRAP") {
-      cat("performing FRAP preset analysis")
-    } else {
-      cat("disc() input not recognized - check type errors")
-    }
-  } else if(cols > 2) {
-    cat("multi column analysis")
-    data = multicol(data)
-  } else {
-    cat("problem with data input")
-  }
-  
-  if(exists("data")){
-    plotFun(data,style)
-  } else {return("sry something went wront")}
+  presetChoice = presetFunction(input)   
+  statTest = methodChoice(method, input)
+}
 
-  
+#' function for the preset usage
+#' @param presetApp is the input for the specific preset
+#' @return returns a function output specific for the choosen preset
+presetFunction <- function(presetApp) {
+  switch(presetApp, 
+         facs = cat("performing FACS preset analysis"),
+         FACS = cat("performing FACS preset analysis"),
+         frap = cat("performing FRAP preset analysis"),
+         FRAP = cat("performing FRAP preset analysis"),
+         NULL = cat("no preset choosen"))
+}
+
+#' splitts calculation in paired and unpaired sections
+#' @param method is the method parameter and the 
+#' @param input is the data.frame
+#' @return returns the statistical calculations for each section
+methodChoice <- function(method,x){
+  switch(method,
+         unPaired = unPairedTest(x),
+         paired = pairedTest(x))
 }
 
 #' Output for only paired tests
 #' @param input taking the output of all statistical methods
 #' @return extacts p value of all paired tests and adds them to data.frame
 pairedTest <- function(input){
-  
   shapiroT %<-% shapiroTest(input)
   corT %<-% corTest(input)
   chiT %<-% chiSQTest(input)
@@ -58,7 +59,6 @@ pairedTest <- function(input){
   anovaT %<-% anovaTest(input)
   
   #create data.frame ordered by test function
-  
   return(output)
 }
 
@@ -66,7 +66,6 @@ pairedTest <- function(input){
 #' @param input taking the output of all statistical methods
 #' @return extacts p value of all un-paired tests and adds them to data.frame
 unPairedTest <- function(input){
-  
   welchT %<-% welchTest(input)
   #shapiroT = shapiroTest(input)
   corT %<-% corTest(input)
@@ -87,14 +86,12 @@ unPairedTest <- function(input){
   output = dataComp
   
   #create data.frame ordered by test function
-  
   return(output)
 }
 
 #' @title multicol
 #' @param x A data.frame or data.table
 #' @return performing muliple calculations on a data frame with multiple columns
-
 multicol <- function(x){
   shapiroTest = disc.normal(x)
   corTest = cor(x, use = "complete.obs") 
@@ -108,7 +105,6 @@ multicol <- function(x){
 #' @title disc.normal() 
 #' @param x A data.frame or data.table
 #' @return showing shapiro.test output of the data.frame
-#' 
 disc.normal <- function(x){
   data = lapply(x, shapiro.test)
   pval = c()
@@ -120,7 +116,6 @@ disc.normal <- function(x){
   output = list("pvalue" = pval, "nameColumn" = nameColumn)
   
   #call d3.js graphic function via htmlwidgets here
-  
   return(output)
 }
 
