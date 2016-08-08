@@ -4,13 +4,13 @@
 \alias{presetFunction}
 \title{function for the preset usage}
 \usage{
-presetFunction(presetApp)
+presetFunction(presetApp, x)
 }
 \arguments{
 \item{presetApp}{is the input for the specific preset}
 }
 \value{
-returns a function output specific for the choosen preset
+returns modified data output specific for the choosen preset
 }
 \description{
 function for the preset usage

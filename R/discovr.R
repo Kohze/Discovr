@@ -21,20 +21,23 @@ disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
   library(d3heatmap)
   library(future)
   
-  presetChoice = presetFunction(input)   
-  statTest = methodChoice(method, input)
+  modInput = presetFunction(method, input)   
+  statTest = methodChoice(method, modInput)
+  outputGraphic = graphicGen(statTest, style)
+  return(statTest)
 }
 
 #' function for the preset usage
 #' @param presetApp is the input for the specific preset
-#' @return returns a function output specific for the choosen preset
-presetFunction <- function(presetApp) {
-  switch(presetApp, 
-         facs = cat("performing FACS preset analysis"),
-         FACS = cat("performing FACS preset analysis"),
+#' @return returns modified data output specific for the choosen preset
+presetFunction <- function(presetApp, x) {
+  output = switch(presetApp, 
+         facs = log(x),
+         FACS = log(x),
          frap = cat("performing FRAP preset analysis"),
          FRAP = cat("performing FRAP preset analysis"),
-         NULL = cat("no preset choosen"))
+         NULL = x)
+  return(output)
 }
 
 #' splitts calculation in paired and unpaired sections
@@ -67,20 +70,10 @@ pairedTest <- function(input){
 #' @return extacts p value of all un-paired tests and adds them to data.frame
 unPairedTest <- function(input){
   welchT %<-% welchTest(input)
-  #shapiroT = shapiroTest(input)
+  shapiroT %<-% shapiroTest(input)
   corT %<-% corTest(input)
   chiT %<-% chiSQTest(input)
-  #anovaT = anovaTest(input)
-  
-  dataComp = data.frame()
-  dataComp[1,1] = welchT$p.value
-  dataComp[1,2] = corT
-  dataComp[1,3] = chiT
-  
-  #just some added columns as space filler for now
-  dataComp[2,2] = welchT$p.value
-  dataComp[2,3] = corT
-  dataComp[2,1] = chiT
+  anovaT %<-% anovaTest(input)
   
   colnames(dataComp) = c("Welch","Correlation","Chi Square")
   output = dataComp
@@ -118,4 +111,3 @@ disc.normal <- function(x){
   #call d3.js graphic function via htmlwidgets here
   return(output)
 }
-
