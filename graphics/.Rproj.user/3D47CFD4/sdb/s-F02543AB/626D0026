@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "\nvar color = d3.scale.category20c();\n\nvar treemap = d3.layout.treemap()\n.size([width, height])\n.sticky(true)\n.value(function(d) { return d.size; });\n\nvar div = d3.select(\"body\").append(\"div\")\n.style(\"position\", \"relative\")\n.style(\"width\", (width + margin.left + margin.right) + \"px\")\n.style(\"height\", (height + margin.top + margin.bottom) + \"px\")\n.style(\"left\", margin.left + \"px\")\n.style(\"top\", margin.top + \"px\");\n\nd3.json(\"flare.json\", function(error, root) {\n  if (error) throw error;\n  \n  var node = div.datum(root).selectAll(\".node\")\n  .data(treemap.nodes)\n  .enter().append(\"div\")\n  .attr(\"class\", \"node\")\n  .call(position)\n  .style(\"background\", function(d) { return d.children ? color(d.name) : null; })\n  .text(function(d) { return d.children ? null : d.name; });\n  \n  d3.selectAll(\"input\").on(\"change\", function change() {\n    var value = this.value === \"count\"\n    ? function() { return 1; }\n    : function(d) { return d.size; };\n    \n    node\n    .data(treemap.value(value).nodes)\n    .transition()\n    .duration(1500)\n    .call(position);\n  });\n});\n\nfunction position() {\n  this.style(\"left\", function(d) { return d.x + \"px\"; })\n  .style(\"top\", function(d) { return d.y + \"px\"; })\n  .style(\"width\", function(d) { return Math.max(0, d.dx - 1) + \"px\"; })\n  .style(\"height\", function(d) { return Math.max(0, d.dy - 1) + \"px\"; });\n}\n",
+    "created" : 1471017626339.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3239443233",
+    "id" : "626D0026",
+    "lastKnownWriteTime" : 0,
+    "last_content_update" : 1471017853105,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "var tree = {\n  name: \"tree\",\n  children: [\n    { name: \"Word-wrapping comes for free in HTML\", size: 16000 },\n    { name: \"animate makes things fun\", size: 8000 },\n    { name: \"data data everywhere...\", size: 5220 },\n    { name: \"display something beautiful\", size: 3623 },\n    { name: \"flex your muscles\", size: 984 },\n    { name: \"physics is religion\", size: 6410 },\n    { name: \"query and you get the answer\", size: 2124 }\n    ]\n};\n\nvar color = d3.scale.category20c(),\ndiv = d3.select(\"body\").append(\"div\")\n.style(\"position\", \"relative\");\n\nvar treemap = d3.layout.treemap()\n.size(400, 400])\n.sticky(true)\n.value(function(d) { return d.size; });\n\nvar node = div.datum(tree).selectAll(\".node\")\n.data(treemap.nodes)\n.enter().append(\"div\")\n.attr(\"class\", \"node\")\n.call(position)\n.style(\"background-color\", function(d) {\n  return d.name == 'tree' ? '#fff' : color(d.name); })\n.append('div')\n.style(\"font-size\", function(d) {\n  // compute font size based on sqrt(area)\n  return Math.max(20, 0.18*Math.sqrt(d.area))+'px'; })\n.text(function(d) { return d.children ? null : d.name; });\n\nfunction position() {\n  this.style(\"left\", function(d) { return d.x + \"px\"; })\n  .style(\"top\", function(d) { return d.y + \"px\"; })\n  .style(\"width\", function(d) { return Math.max(0, d.dx - 1) + \"px\"; })\n  .style(\"height\", function(d) { return Math.max(0, d.dy - 1) + \"px\"; });\n}",
+    "created" : 1471018635544.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "4211842511",
+    "id" : "E608F79",
+    "lastKnownWriteTime" : 176093659178,
+    "last_content_update" : 1471018739028,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
