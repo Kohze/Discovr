@@ -300,7 +300,7 @@ var d1 = {
      ],
 };
 
-var d2 = {
+var d = {
    "name": "query",
    "children": [
     {"name": "AggregateExpression", "size": 1616},
@@ -323,8 +323,6 @@ var d2 = {
     {"name": "Maximum", "size": 843},
    ]
 };
-
-var d = x.inputNames;
 
 var diameter = 350,
     format = d3.format(",d"),

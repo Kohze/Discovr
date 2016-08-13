@@ -110,11 +110,11 @@ HTMLWidgets.widget({
                         .attr("cy", 200)
                         .on("mouseover", function() {
                             d3.select("#tx2").text(x.text1).style('opacity', 1);
-                            d3.select(this).style("fill","grey").style("stroke","black");
+                            d3.select(this).style("fill","grey");
                         })
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
-                            d3.select(this).style("fill","black").style("stroke","");
+                            d3.select(this).style("fill","black");
                         });
 
 
@@ -147,14 +147,11 @@ HTMLWidgets.widget({
                         .on("mouseover", function() {
                             d3.select("#tx2").text(x.text3).style('opacity', 1);
                             d3.select(this).style("fill","grey");
+
                         })
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
                             d3.select(this).style("fill","black");
-                        })
-                        .on("click", function() {
-                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
-                            d3.selectAll(".node").style("opacity",1).style("display","block");
                         });
 
    sampleSVG.append("circle")
@@ -170,10 +167,6 @@ HTMLWidgets.widget({
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
                             d3.select(this).style("fill","black");
-                        })
-                        .on("click", function() {
-                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
-                            d3.selectAll(".node").style("opacity",1).style("display","block");
                         });
 
    sampleSVG.append("circle")
@@ -189,10 +182,6 @@ HTMLWidgets.widget({
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
                             d3.select(this).style("fill","black");
-                        })
-                        .on("click", function() {
-                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
-                            d3.selectAll(".node").style("opacity",1).style("display","block");
                         });
 
    sampleSVG.append("circle")
@@ -208,10 +197,6 @@ HTMLWidgets.widget({
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
                             d3.select(this).style("fill","black");
-                        })
-                        .on("click", function() {
-                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
-                            d3.selectAll(".node").style("opacity",1).style("display","block");
                         });
 
    sampleSVG.append("circle")
@@ -227,10 +212,6 @@ HTMLWidgets.widget({
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
                             d3.select(this).style("fill","black");
-                        })
-                        .on("click", function() {
-                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
-                            d3.selectAll(".node").style("opacity",1).style("display","block");
                         });
 
 
@@ -300,7 +281,7 @@ var d1 = {
      ],
 };
 
-var d2 = {
+var d = {
    "name": "query",
    "children": [
     {"name": "AggregateExpression", "size": 1616},
@@ -323,8 +304,6 @@ var d2 = {
     {"name": "Maximum", "size": 843},
    ]
 };
-
-var d = x.inputNames;
 
 var diameter = 350,
     format = d3.format(",d"),

@@ -110,13 +110,15 @@ HTMLWidgets.widget({
                         .attr("cy", 200)
                         .on("mouseover", function() {
                             d3.select("#tx2").text(x.text1).style('opacity', 1);
-                            d3.select(this).style("fill","grey").style("stroke","black");
+                            d3.select(this).style("fill","grey");
                         })
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
-                            d3.select(this).style("fill","black").style("stroke","");
+                            d3.select(this).style("fill","black");
+                        })
+                        .on("click", function() {
+                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
                         });
-
 
 
    sampleSVG.append("circle")
@@ -132,10 +134,6 @@ HTMLWidgets.widget({
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
                             d3.select(this).style("fill","black");
-                        })
-                        .on("click", function() {
-                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
-                            d3.selectAll(".node").style("opacity",1).style("display","block");
                         });
 
    sampleSVG.append("circle")
@@ -147,14 +145,11 @@ HTMLWidgets.widget({
                         .on("mouseover", function() {
                             d3.select("#tx2").text(x.text3).style('opacity', 1);
                             d3.select(this).style("fill","grey");
+
                         })
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
                             d3.select(this).style("fill","black");
-                        })
-                        .on("click", function() {
-                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
-                            d3.selectAll(".node").style("opacity",1).style("display","block");
                         });
 
    sampleSVG.append("circle")
@@ -170,10 +165,6 @@ HTMLWidgets.widget({
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
                             d3.select(this).style("fill","black");
-                        })
-                        .on("click", function() {
-                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
-                            d3.selectAll(".node").style("opacity",1).style("display","block");
                         });
 
    sampleSVG.append("circle")
@@ -189,10 +180,6 @@ HTMLWidgets.widget({
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
                             d3.select(this).style("fill","black");
-                        })
-                        .on("click", function() {
-                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
-                            d3.selectAll(".node").style("opacity",1).style("display","block");
                         });
 
    sampleSVG.append("circle")
@@ -208,10 +195,6 @@ HTMLWidgets.widget({
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
                             d3.select(this).style("fill","black");
-                        })
-                        .on("click", function() {
-                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
-                            d3.selectAll(".node").style("opacity",1).style("display","block");
                         });
 
    sampleSVG.append("circle")
@@ -227,10 +210,6 @@ HTMLWidgets.widget({
                         .on("mouseout", function() {
                             d3.select("#tx2").style('opacity', 1);
                             d3.select(this).style("fill","black");
-                        })
-                        .on("click", function() {
-                            d3.selectAll("#bubblePlot").style("opacity",1).style("display","block");
-                            d3.selectAll(".node").style("opacity",1).style("display","block");
                         });
 
 
@@ -300,7 +279,7 @@ var d1 = {
      ],
 };
 
-var d2 = {
+var d = {
    "name": "query",
    "children": [
     {"name": "AggregateExpression", "size": 1616},
@@ -324,8 +303,6 @@ var d2 = {
    ]
 };
 
-var d = x.inputNames;
-
 var diameter = 350,
     format = d3.format(",d"),
     color = d3.scale.category20c();
@@ -344,13 +321,10 @@ svg.append("rect")
    .attr("width", "100%")
    .attr("height", "100%")
    .attr("fill", "white")
-   .style("opacity", 0)
-   .style("display","none");
+   .style("opacity", 0);
 
 svg.append("rect")
    .attr("id","bubblePlot")
-   .style("opacity", 0)
-   .style("display","none")
    .attr("width", 80)
    .attr("height", 40)
    .attr("fill", "red")
@@ -362,7 +336,6 @@ svg.append("text")
    .attr("id","bubblePlot")
    .attr("x", 20)
    .attr("y", 26)
-   .style("opacity", 0)
    .text("back");
 
 d3.json(d, function(error, root) {
@@ -372,8 +345,6 @@ d3.json(d, function(error, root) {
       .filter(function(d) { return !d.children; }))
       .enter().append("g")
       .attr("class", "node")
-      .style("opacity", 0)
-      .style("display","none")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
   node.append("title")
