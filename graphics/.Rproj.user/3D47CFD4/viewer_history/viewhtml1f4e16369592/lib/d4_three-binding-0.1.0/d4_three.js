@@ -399,7 +399,6 @@ function classes(root) {
 
 d3.select(self.frameElement).style("height", diameter + "px");
 d3.selectAll("g").style("opacity", 0);
-
       },
 
       resize: function(width, height) {

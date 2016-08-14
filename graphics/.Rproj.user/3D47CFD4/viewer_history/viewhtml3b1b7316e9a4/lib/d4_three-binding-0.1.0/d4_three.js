@@ -18,33 +18,13 @@ HTMLWidgets.widget({
   var sampleSVG = d3.select("#" + el.id).append("svg");
   var svg = sampleSVG.attr("class", "bubble");
 
- function updateJSON(){
+  function updateJSON(){
     d = x.inputNames;
     return(d);
   }
 
   function updateJSON2(){
     d = x.inputNames2;
-    return(d);
-  }
-
-  function updateJSON3(){
-    d = x.inputNames3;
-    return(d);
-  }
-
-  function updateJSON4(){
-    d = x.inputNames4;
-    return(d);
-  }
-
-  function updateJSON5(){
-    d = x.inputNames5;
-    return(d);
-  }
-
-   function updateJSON6(){
-    d = x.inputNames6;
     return(d);
   }
 
@@ -155,7 +135,7 @@ HTMLWidgets.widget({
                         .attr("cx", 100)
                         .attr("cy", 150)
                         .on("mouseover", function() {
-                            getNewData(updateJSON())
+                            getNewData(updateJSON2());
                             d3.select("#tx2").text(x.text2).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -175,7 +155,7 @@ HTMLWidgets.widget({
                         .attr("cx", 100)
                         .attr("cy", 250)
                         .on("mouseover", function() {
-                            getNewData(updateJSON2());
+                            firstPlot();
                             d3.select("#tx2").text(x.text3).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -195,7 +175,6 @@ HTMLWidgets.widget({
                         .attr("cx", 200)
                         .attr("cy", 100)
                         .on("mouseover", function() {
-                            getNewData(updateJSON3());
                             d3.select("#tx2").text(x.text4).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -215,7 +194,6 @@ HTMLWidgets.widget({
                         .attr("cx", 200)
                         .attr("cy", 180)
                         .on("mouseover", function() {
-                            getNewData(updateJSON4());
                             d3.select("#tx2").text(x.text5).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -235,7 +213,6 @@ HTMLWidgets.widget({
                         .attr("cx", 200)
                         .attr("cy", 220)
                         .on("mouseover", function() {
-                            getNewData(updateJSON5());
                             d3.select("#tx2").text(x.text6).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -255,7 +232,6 @@ HTMLWidgets.widget({
                         .attr("cx", 200)
                         .attr("cy", 300)
                         .on("mouseover", function() {
-                            getNewData(updateJSON6());
                             d3.select("#tx2").text(x.text7).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -385,6 +361,37 @@ d3.json(input, function(error, root) {
 });
 }
 
+function firstPlot() {
+d3.selectAll("g").remove();
+d3.json(updateJSON(), function(error, root) {
+  var node = svg.selectAll(".node")
+      .attr("id","bubblePlot")
+      .data(bubble.nodes(classes(d))
+      .filter(function(d) { return !d.children; }))
+      .enter().append("g")
+      .attr("class", "node")
+      .style("opacity", 0)
+      .style("display","none")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+  node.append("title")
+      .attr("id","bubblePlot")
+      .text(function(d) { return d.className + ": " + format(d.value); });
+
+  node.append("circle")
+      .attr("id","bubblePlot")
+      .attr("r", function(d) { return d.r; })
+      .style("fill", function(d) { return color(d.packageName); });
+
+  node.append("text")
+      .attr("id","bubblePlot")
+      .attr("font-size", "8px")
+      .attr("dy", ".2em")
+      .style("text-anchor", "middle")
+      .text(function(d) { return d.className.substring(0, d.r / 3); });
+});
+}
+
 function classes(root) {
   var classes = [];
 
@@ -399,7 +406,6 @@ function classes(root) {
 
 d3.select(self.frameElement).style("height", diameter + "px");
 d3.selectAll("g").style("opacity", 0);
-
       },
 
       resize: function(width, height) {

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' <Add Title>\n#'\n#' <Add Description>\n#'\n#' @import htmlwidgets\n#'\n#' @export\nd4_three <- function(inputList, width = \"auto\", height = \"auto\") {\n\n  # forward options using x\n  x = list(\n    col1 = inputList[[\"col1\"]],\n    col2 = inputList[[\"col2\"]],\n    col3 = inputList[[\"col3\"]],\n    col4 = inputList[[\"col4\"]],\n    col5 = inputList[[\"col5\"]],\n    col6 = inputList[[\"col6\"]],\n    text1 = inputList[[\"text1\"]],\n    text2 = inputList[[\"text2\"]],\n    text3 = inputList[[\"text3\"]],\n    text4 = inputList[[\"text4\"]],\n    text5 = inputList[[\"text5\"]],\n    text6 = inputList[[\"text6\"]],\n    text7 = inputList[[\"text7\"]],\n    cNames = inputList[[\"names\"]],\n    inputNames = inputList[[\"inputNames\"]],\n    inputNames2 = inputList[[\"inputNames2\"]],\n    inputNames3 = inputList[[\"inputNames3\"]],\n    inputNames4 = inputList[[\"inputNames4\"]],\n    inputNames5 = inputList[[\"inputNames5\"]],\n    inputNames6 = inputList[[\"inputNames6\"]]\n  )\n\n  # create widget\n  htmlwidgets::createWidget(\n    name = 'd4_three',\n    x,\n    width = width,\n    height = height,\n    package = 'd3three'\n  )\n}\n\n#' Shiny bindings for d4_three\n#'\n#' Output and render functions for using d4_three within Shiny\n#' applications and interactive Rmd documents.\n#'\n#' @param outputId output variable to read from\n#' @param width,height Must be a valid CSS unit (like \\code{'100\\%'},\n#'   \\code{'400px'}, \\code{'auto'}) or a number, which will be coerced to a\n#'   string and have \\code{'px'} appended.\n#' @param expr An expression that generates a d4_three\n#' @param env The environment in which to evaluate \\code{expr}.\n#' @param quoted Is \\code{expr} a quoted expression (with \\code{quote()})? This\n#'   is useful if you want to save an expression in a variable.\n#'\n#' @name d4_three-shiny\n#'\n#' @export\nd4_threeOutput <- function(outputId, width = '100%', height = '100%'){\n  htmlwidgets::shinyWidgetOutput(outputId, 'd4_three', width, height, package = 'd3three')\n}\n\n#' @rdname d4_three-shiny\n#' @export\nrenderD4_three <- function(expr, env = parent.frame(), quoted = FALSE) {\n  if (!quoted) { expr <- substitute(expr) } # force quoted\n  htmlwidgets::shinyRenderWidget(expr, d4_threeOutput, env, quoted = TRUE)\n}\n",
+    "created" : 1470130580780.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2036304364",
+    "id" : "4B4A4913",
+    "lastKnownWriteTime" : 1471213246,
+    "last_content_update" : 1471213246256,
+    "path" : "~/d3three/R/d4_three.R",
+    "project_path" : "R/d4_three.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

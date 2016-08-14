@@ -23,28 +23,9 @@ HTMLWidgets.widget({
     return(d);
   }
 
+
   function updateJSON2(){
     d = x.inputNames2;
-    return(d);
-  }
-
-  function updateJSON3(){
-    d = x.inputNames3;
-    return(d);
-  }
-
-  function updateJSON4(){
-    d = x.inputNames4;
-    return(d);
-  }
-
-  function updateJSON5(){
-    d = x.inputNames5;
-    return(d);
-  }
-
-   function updateJSON6(){
-    d = x.inputNames6;
     return(d);
   }
 
@@ -155,7 +136,7 @@ HTMLWidgets.widget({
                         .attr("cx", 100)
                         .attr("cy", 150)
                         .on("mouseover", function() {
-                            getNewData(updateJSON())
+                            getNewData(updateJSON2())
                             d3.select("#tx2").text(x.text2).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -175,7 +156,7 @@ HTMLWidgets.widget({
                         .attr("cx", 100)
                         .attr("cy", 250)
                         .on("mouseover", function() {
-                            getNewData(updateJSON2());
+                            getNewData(updateJSON())
                             d3.select("#tx2").text(x.text3).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -195,7 +176,6 @@ HTMLWidgets.widget({
                         .attr("cx", 200)
                         .attr("cy", 100)
                         .on("mouseover", function() {
-                            getNewData(updateJSON3());
                             d3.select("#tx2").text(x.text4).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -215,7 +195,6 @@ HTMLWidgets.widget({
                         .attr("cx", 200)
                         .attr("cy", 180)
                         .on("mouseover", function() {
-                            getNewData(updateJSON4());
                             d3.select("#tx2").text(x.text5).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -235,7 +214,6 @@ HTMLWidgets.widget({
                         .attr("cx", 200)
                         .attr("cy", 220)
                         .on("mouseover", function() {
-                            getNewData(updateJSON5());
                             d3.select("#tx2").text(x.text6).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -255,7 +233,6 @@ HTMLWidgets.widget({
                         .attr("cx", 200)
                         .attr("cy", 300)
                         .on("mouseover", function() {
-                            getNewData(updateJSON6());
                             d3.select("#tx2").text(x.text7).style('opacity', 1);
                             d3.select(this).style("fill","grey");
                         })
@@ -399,7 +376,6 @@ function classes(root) {
 
 d3.select(self.frameElement).style("height", diameter + "px");
 d3.selectAll("g").style("opacity", 0);
-
       },
 
       resize: function(width, height) {
