@@ -8,6 +8,8 @@
 #' @include statisticFun.R
 #' @import future
 #' @import ggtern
+#' @import d3three
+#' @import jsonlite
 #' @examples 
 #' disc(mtcars[1:2])
 #' @export
@@ -22,8 +24,8 @@ disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
   
   modInput = presetFunction(method, input)   
   statTest = methodChoice(method, modInput)
-  outputGraphic = graphicGen(statTest, style)
-  return(statTest)
+  outputGraphic = graphicGen(statTest)
+  return(d4_three(outputGraphic))
 }
 
 #' function for the preset usage
@@ -38,6 +40,38 @@ presetFunction <- function(presetApp, x) {
          NULL = x)
   return(output)
 }
+
+#' splitts calculation in paired and unpaired sections
+#' @param method is the method parameter and the 
+#' @param input is the data.frame
+#' @return returns the statistical calculations for each section
+graphicGen <- function(x){
+    a = data.frame("name" = c("one","two","tree"), "size" = c(3,2,1))
+    b = list("name" = "query", "children" = a)
+    c = toJSON(b, pretty = TRUE)
+    output = list("col1" = "blue", 
+                  "col2" = "green",
+                  "col3" = "blue", 
+                  "col4" = "green",
+                  "col5" = "blue", 
+                  "col6" = "green",
+                  "text1" = "tester1",
+                  "text2" = "tester2",
+                  "text3" = "tester3",
+                  "text4" = "tester4",
+                  "text5" = "tester5",
+                  "text6" = "tester6",
+                  "text7" = "tester7",
+                  "names" = c("mpg","cyl","disp", "hp"),
+                  "inputNames" = c,
+                  "inputNames2" = c,
+                  "inputNames3" = c,
+                  "inputNames4" = c,
+                  "inputNames5" = c,
+                  "inputNames6" = c
+                  )
+    return(output)
+  }
 
 #' splitts calculation in paired and unpaired sections
 #' @param method is the method parameter and the 
