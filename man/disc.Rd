@@ -19,7 +19,6 @@ disc(x, method = "unpaired", preset = NULL, style = "heatmap")
 The calculation output
 }
 \examples{
-library(Discovr)
 disc(mtcars[1:2])
 }
 

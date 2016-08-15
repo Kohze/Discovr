@@ -9,7 +9,6 @@
 #' @import future
 #' @import ggtern
 #' @examples 
-#' library(Discovr)
 #' disc(mtcars[1:2])
 #' @export
 disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
@@ -34,8 +33,8 @@ presetFunction <- function(presetApp, x) {
   output = switch(presetApp, 
          facs = log(x),
          FACS = log(x),
-         frap = cat("performing FRAP preset analysis"),
-         FRAP = cat("performing FRAP preset analysis"),
+         frap = cat("The frap algorithm from FRAPBOT will be included soon"),
+         FRAP = cat("The frap algorithm from FRAPBOT will be included soon"),
          NULL = x)
   return(output)
 }
@@ -98,6 +97,7 @@ multicol <- function(x){
 #' @title disc.normal() 
 #' @param x A data.frame or data.table
 #' @return showing shapiro.test output of the data.frame
+#' @export
 disc.normal <- function(x){
   data = lapply(x, shapiro.test)
   pval = c()
@@ -106,7 +106,9 @@ disc.normal <- function(x){
   }
   
   nameColumn = names(x)
-  output = list("pvalue" = pval, "nameColumn" = nameColumn)
+  output = data.frame("nameColumn" = nameColumn, "pvalue" = pval)
+  output$isNormalDistributed[output$pvalue < 0.05] = TRUE
+  output$isNormalDistributed[output$pvalue > 0.05] = FALSE
   
   #call d3.js graphic function via htmlwidgets here
   return(output)
