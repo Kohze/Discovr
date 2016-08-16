@@ -1,6 +1,6 @@
 # Discovr
 
-htmlwidgets D3 Graphics are coming the next days!
+htmlwidgets D3 Graphics are now integrated! this readme will be updated the next days to show the new functionalities. 
 
 Graphical clusters of a variety of statistical analysis methods (work in progress)
 
@@ -19,19 +19,9 @@ note: The gif only shows 6 heatmap fields - the end result will have ~20-25. Add
 Syntax
 --------------
 
-    disc(x, method = "unpaired", preset = NULL, style = "heatmap")
+    disc(x, method = "unpaired", preset = NULL)
 
 with x as data.frame or data.table. Method is either "paired" or "unpaired".
-
-
-Style
---------------
-
-Different graphical styles will be available
-
-- Heatmap
-- Ternary Plot
-- Cleveland Dot Plot
 
 
 Presets
