@@ -13,19 +13,14 @@
 #' @examples 
 #' disc(mtcars[1:2])
 #' @export
-disc <- function(x, method = "unpaired", preset = NULL, style = "heatmap"){
-  method = as.character(method)
+disc <- function(x, method = "unPaired", preset = NULL){
   input = as.data.frame(x)
-  cols = length(input)
   if(!is.null(preset)) presetApp = as.character(preset)
   
   library(d3heatmap)
   library(future)
   
-  modInput = presetFunction(method, input)   
-  statTest = methodChoice(method, modInput)
-  outputGraphic = graphicGen(statTest)
-  return(d4_three(outputGraphic))
+  return(d4_three(graphicGen(methodChoice(method, input))))
 }
 
 #' function for the preset usage
@@ -45,11 +40,47 @@ presetFunction <- function(presetApp, x) {
 #' @param method is the method parameter and the 
 #' @param input is the data.frame
 #' @return returns the statistical calculations for each section
+dataAdjust <- function(a){
+  result = expand.grid(a = colnames(a), b = colnames(a))
+  result$c[result$a == result$b] = TRUE
+  result$c[result$a != result$b] = FALSE
+  result = result[!result$c,]
+  
+  for(i in 1:nrow(result)){
+    result$data[i] = a[result$a[i],result$b[i]]
+  }
+  
+  result$duplicated = duplicated(result$data)
+  
+  for(i in 1:nrow(result)){
+    if(result$duplicated[i] == FALSE) {
+      result$output[i] = paste(result$a[i],result$b[i], collapse = " ")
+    } else {
+      result$output[i] = paste(result$b[i],result$a[i], collapse = " ")
+    }
+  }
+  
+  bed = result[result$duplicated == FALSE & !is.na(result$data),]
+  bed$data = abs(bed$data)
+  
+  preOutput = data.frame("name" = bed$output, "size" = bed$data)
+  output = toJSON(list("name" = "query", "children" = preOutput), pretty = TRUE)
+  return(output)
+}
+
+#' splitts calculation in paired and unpaired sections
+#' @param method is the method parameter and the 
+#' @param input is the data.frame
+#' @return returns the statistical calculations for each section
 graphicGen <- function(x){
-    a = data.frame("name" = c("one","two","tree"), "size" = c(3,2,1))
-    b = list("name" = "query", "children" = a)
-    c = toJSON(b, pretty = TRUE)
-    output = list("col1" = "blue", 
+    x1 = dataAdjust(x[["x2"]])
+    x2 = dataAdjust(x[["x2"]])
+    x3 = dataAdjust(x[["x3"]])
+    x4 = dataAdjust(x[["x4"]])
+    x5 = dataAdjust(x[["x5"]])
+    x6 = dataAdjust(x[["x2"]])
+    d = paste(names(mtcars), collapse = " ")
+    output = list("col1" = "blue",
                   "col2" = "green",
                   "col3" = "blue", 
                   "col4" = "green",
@@ -62,13 +93,13 @@ graphicGen <- function(x){
                   "text5" = "tester5",
                   "text6" = "tester6",
                   "text7" = "tester7",
-                  "names" = c("mpg","cyl","disp", "hp"),
-                  "inputNames" = c,
-                  "inputNames2" = c,
-                  "inputNames3" = c,
-                  "inputNames4" = c,
-                  "inputNames5" = c,
-                  "inputNames6" = c
+                  "names" = d,
+                  "inputNames" = x1,
+                  "inputNames2" = x2,
+                  "inputNames3" = x3,
+                  "inputNames4" = x4,
+                  "inputNames5" = x5,
+                  "inputNames6" = x6
                   )
     return(output)
   }
@@ -78,16 +109,17 @@ graphicGen <- function(x){
 #' @param input is the data.frame
 #' @return returns the statistical calculations for each section
 methodChoice <- function(method,x){
-  switch(method,
-         unPaired = unPairedTest(x),
-         paired = pairedTest(x))
+  output = switch(method,
+                  unPaired = unPairedTest(x),
+                  paired = pairedTest(x))
+  return(output)
 }
 
 #' Output for only paired tests
 #' @param input taking the output of all statistical methods
 #' @return extacts p value of all paired tests and adds them to data.frame
 pairedTest <- function(input){
-  shapiroT %<-% shapiroTest(input)
+  shapiroT %<-% shapiroT(input)
   corT %<-% corTest(input)
   chiT %<-% chiSQTest(input)
   manwiT %<-% mannWhitTest(input) 
@@ -103,15 +135,17 @@ pairedTest <- function(input){
 #' @return extacts p value of all un-paired tests and adds them to data.frame
 unPairedTest <- function(input){
   welchT %<-% welchTest(input)
-  shapiroT %<-% shapiroTest(input)
+  shapiroT %<-% shapiroT(input)
   corT %<-% corTest(input)
   chiT %<-% chiSQTest(input)
   anovaT %<-% anovaTest(input)
   
-  colnames(dataComp) = c("Welch","Correlation","Chi Square")
-  output = dataComp
+  output = list("x1" = welchT,
+                "x2" = shapiroT,
+                "x3" = corT,
+                "x4" = chiT,
+                "x5" = anovaT)
   
-  #create data.frame ordered by test function
   return(output)
 }
 

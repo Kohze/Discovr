@@ -4,7 +4,7 @@
 \alias{disc}
 \title{discovr()}
 \usage{
-disc(x, method = "unpaired", preset = NULL, style = "heatmap")
+disc(x, method = "unPaired", preset = NULL)
 }
 \arguments{
 \item{x}{A data.frame or data.table}
