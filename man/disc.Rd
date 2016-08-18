@@ -19,6 +19,6 @@ disc(x, method = "unPaired", preset = NULL)
 The calculation output
 }
 \examples{
-disc(mtcars[1:2])
+disc(mtcars)
 }
 

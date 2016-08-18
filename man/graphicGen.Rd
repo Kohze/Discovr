@@ -4,7 +4,7 @@
 \alias{graphicGen}
 \title{splitts calculation in paired and unpaired sections}
 \usage{
-graphicGen(x)
+graphicGen(x, method)
 }
 \arguments{
 \item{method}{is the method parameter and the}

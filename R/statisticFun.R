@@ -28,7 +28,8 @@ shapiroT <- function(x){
   for(i in 1:length(x)){
     resultVec = c(resultVec, shapTest[[i]]$p.value)
   }
-  output = data.frame(names(x),resultVec)
+  preOutput = data.frame("name" = names(x),"size" = resultVec)
+  output = toJSON(list("name" = "query", "children" = preOutput), pretty = TRUE)
   return(output)
 }
 

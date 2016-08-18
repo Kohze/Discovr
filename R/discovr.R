@@ -11,16 +11,12 @@
 #' @import d3three
 #' @import jsonlite
 #' @examples 
-#' disc(mtcars[1:2])
+#' disc(mtcars)
 #' @export
 disc <- function(x, method = "unPaired", preset = NULL){
   input = as.data.frame(x)
-  if(!is.null(preset)) presetApp = as.character(preset)
-  
-  library(d3heatmap)
-  library(future)
-  
-  return(d4_three(graphicGen(methodChoice(method, input))))
+
+  return(d4_three(graphicGen(methodChoice(method, input), method)))
 }
 
 #' function for the preset usage
@@ -54,9 +50,9 @@ dataAdjust <- function(a){
   
   for(i in 1:nrow(result)){
     if(result$duplicated[i] == FALSE) {
-      result$output[i] = paste(result$a[i],result$b[i], collapse = " ")
+      result$output[i] = paste(result$a[i],result$b[i], collapse = "/")
     } else {
-      result$output[i] = paste(result$b[i],result$a[i], collapse = " ")
+      result$output[i] = paste(result$b[i],result$a[i], collapse = "/")
     }
   }
   
@@ -72,13 +68,14 @@ dataAdjust <- function(a){
 #' @param method is the method parameter and the 
 #' @param input is the data.frame
 #' @return returns the statistical calculations for each section
-graphicGen <- function(x){
-    x1 = dataAdjust(x[["x2"]])
+graphicGen <- function(x, method){
+    x1 = x[["x1"]]
     x2 = dataAdjust(x[["x2"]])
     x3 = dataAdjust(x[["x3"]])
     x4 = dataAdjust(x[["x4"]])
     x5 = dataAdjust(x[["x5"]])
-    x6 = dataAdjust(x[["x2"]])
+    x6 = dataAdjust(x[["x6"]])
+    x7 = dataAdjust(x[["x7"]])
     d = paste(names(mtcars), collapse = " ")
     output = list("col1" = "blue",
                   "col2" = "green",
@@ -86,20 +83,25 @@ graphicGen <- function(x){
                   "col4" = "green",
                   "col5" = "blue", 
                   "col6" = "green",
-                  "text1" = "tester1",
-                  "text2" = "tester2",
-                  "text3" = "tester3",
-                  "text4" = "tester4",
-                  "text5" = "tester5",
-                  "text6" = "tester6",
-                  "text7" = "tester7",
+                  "col7" = "green",
+                  "text1" = "Shapiro-Wilks",
+                  "text1a1" = "Correlation",
+                  "text2" = "F-Test",
+                  "text3" = "Anova Test",
+                  "text4" = "Student t-test",
+                  "text5" = "Welch's t-test",
+                  "text6" = "Wilcoxon Test",
+                  "text7" = "bayes tree",
                   "names" = d,
+                  "method" = as.character(method),
                   "inputNames" = x1,
+                  "inputNames0" = x1,
                   "inputNames2" = x2,
                   "inputNames3" = x3,
                   "inputNames4" = x4,
                   "inputNames5" = x5,
-                  "inputNames6" = x6
+                  "inputNames6" = x6,
+                  "inputNames7" = x7
                   )
     return(output)
   }
@@ -139,13 +141,16 @@ unPairedTest <- function(input){
   corT %<-% corTest(input)
   chiT %<-% chiSQTest(input)
   anovaT %<-% anovaTest(input)
+  f.test %<-% fTest(input)
   
-  output = list("x1" = welchT,
-                "x2" = shapiroT,
-                "x3" = corT,
-                "x4" = chiT,
-                "x5" = anovaT)
-  
+  output = list("x1" = shapiroT,
+                "x2" = f.test,
+                "x3" = anovaT,
+                "x4" = welchT,
+                "x5" = chiT,
+                "x6" = corT,
+                "x7" = corT)
+            
   return(output)
 }
 
