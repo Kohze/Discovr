@@ -3,7 +3,3 @@
 export(disc)
 export(disc.data)
 export(disc.normal)
-import(d3three)
-import(future)
-import(ggtern)
-import(jsonlite)

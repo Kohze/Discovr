@@ -21,4 +21,7 @@ The calculation output
 \examples{
 disc(mtcars)
 }
+\author{
+Robin Kohze
+}
 

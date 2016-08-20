@@ -5,15 +5,16 @@
 #' @param preset As preset mutliple techniques are allowed, such as "FACS" or "FRAP".
 #' @param style A style input such as "heatmap" / "cleveland" / "ternary" 
 #' @return The calculation output
-#' @include graphics.R
 #' @include statisticFun.R
-#' @import future
-#' @import d3three
-#' @import jsonlite
 #' @examples 
 #' disc(mtcars)
 #' @export
 disc <- function(x, method = "unPaired", preset = NULL){
+  
+  library(future)
+  library(d3three)
+  library(jsonlite)
+  
   input = as.data.frame(x)
   colNames = paste(names(x), collapse = " ")
   dataSetName = deparse(substitute(x))
