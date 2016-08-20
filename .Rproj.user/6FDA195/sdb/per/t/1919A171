@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Discovr Graphics\n#' made possible with htmlwidgets and D3\n#' @import htmlwidgets\n#' @export\nd4_three <- function(inputList, width = \"auto\", height = \"auto\") {\n\n  # forward options using x\n  x = list(\n    col1a1 = inputList[[\"col1a1\"]],\n    col1a2 = inputList[[\"col1a2\"]],\n    col2a1 = inputList[[\"col2a1\"]],\n    col2a2 = inputList[[\"col2a2\"]],\n    col3a1 = inputList[[\"col3a1\"]],\n    col3a2 = inputList[[\"col3a2\"]],\n    col3a3 = inputList[[\"col3a3\"]],\n    col3a4 = inputList[[\"col3a4\"]],\n    text1a1 = inputList[[\"text1a1\"]],\n    text1a2 = inputList[[\"text1a2\"]],\n    text2a1 = inputList[[\"text2a1\"]],\n    text2a2 = inputList[[\"text2a2\"]],\n    text3a1 = inputList[[\"text3a1\"]],\n    text3a2 = inputList[[\"text3a2\"]],\n    text3a3 = inputList[[\"text3a3\"]],\n    text3a4 = inputList[[\"text3a4\"]],\n    text4a1 = inputList[[\"text4a1\"]],\n    cNames = inputList[[\"names\"]],\n    method = inputList[[\"method\"]],\n    inputNames1a1 = inputList[[\"inputNames1a1\"]],\n    inputNames1a2 = inputList[[\"inputNames1a2\"]],\n    inputNames2a1 = inputList[[\"inputNames2a1\"]],\n    inputNames2a2 = inputList[[\"inputNames2a2\"]],\n    inputNames3a1 = inputList[[\"inputNames3a1\"]],\n    inputNames3a2 = inputList[[\"inputNames3a2\"]],\n    inputNames3a3 = inputList[[\"inputNames3a3\"]],\n    inputNames3a4 = inputList[[\"inputNames3a4\"]],\n    inputNames4a1 = inputList[[\"inputNames4a1\"]]\n  )\n\n  # create widget\n  htmlwidgets::createWidget(\n    name = 'd4_three',\n    x,\n    width = width,\n    height = height,\n    package = 'd3three'\n  )\n}\n\n#' Shiny bindings for d4_three\n#'\n#' Output and render functions for using d4_three within Shiny\n#' applications and interactive Rmd documents.\n#'\n#' @param outputId output variable to read from\n#' @param width,height Must be a valid CSS unit (like \\code{'100\\%'},\n#'   \\code{'400px'}, \\code{'auto'}) or a number, which will be coerced to a\n#'   string and have \\code{'px'} appended.\n#' @param expr An expression that generates a d4_three\n#' @param env The environment in which to evaluate \\code{expr}.\n#' @param quoted Is \\code{expr} a quoted expression (with \\code{quote()})? This\n#'   is useful if you want to save an expression in a variable.\n#'\n#' @name d4_three-shiny\n#'\n#' @export\nd4_threeOutput <- function(outputId, width = '100%', height = '100%'){\n  htmlwidgets::shinyWidgetOutput(outputId, 'd4_three', width, height, package = 'd3three')\n}\n\n#' @rdname d4_three-shiny\n#' @export\nrenderD4_three <- function(expr, env = parent.frame(), quoted = FALSE) {\n  if (!quoted) { expr <- substitute(expr) } # force quoted\n  htmlwidgets::shinyRenderWidget(expr, d4_threeOutput, env, quoted = TRUE)\n}\n",
+    "created" : 1471649835944.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2308533818",
+    "id" : "1919A171",
+    "lastKnownWriteTime" : 1471650110,
+    "last_content_update" : 1471650110414,
+    "path" : "~/Discovr_graphics/R/d4_three.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

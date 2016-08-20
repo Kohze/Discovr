@@ -15,8 +15,29 @@
 #' @export
 disc <- function(x, method = "unPaired", preset = NULL){
   input = as.data.frame(x)
+  colNames = paste(names(x), collapse = " ")
+  dataSetName = deparse(substitute(x))
+  
+  return(d4_three(graphicGen(methodChoice(method, input), method, colNames, dataSetName)))
+}
 
-  return(d4_three(graphicGen(methodChoice(method, input), method)))
+#' output of numerical values
+#' @param x is the dataframe input 
+#' @return returns modified data output specific for the choosen method
+#' @export
+disc.data <- function(x, method = "unPaired", preset = NULL){
+  input = as.data.frame(x)
+  preOut = methodChoice(method, input)
+  preVec = fromJSON(preOut$x1)
+  preOut$x1 = preVec$children
+  
+  # if(method == "paired"){
+  #   
+  # } else {
+  #   
+  # }
+  
+  return(preOut)
 }
 
 #' function for the preset usage
@@ -61,6 +82,7 @@ dataAdjust <- function(a){
   
   preOutput = data.frame("name" = bed$output, "size" = bed$data)
   output = toJSON(list("name" = "query", "children" = preOutput), pretty = TRUE)
+  
   return(output)
 }
 
@@ -68,43 +90,49 @@ dataAdjust <- function(a){
 #' @param method is the method parameter and the 
 #' @param input is the data.frame
 #' @return returns the statistical calculations for each section
-graphicGen <- function(x, method){
-    x1 = x[["x1"]]
-    x2 = dataAdjust(x[["x2"]])
-    x3 = dataAdjust(x[["x3"]])
-    x4 = dataAdjust(x[["x4"]])
-    x5 = dataAdjust(x[["x5"]])
-    x6 = dataAdjust(x[["x6"]])
-    x7 = dataAdjust(x[["x7"]])
-    d = paste(names(mtcars), collapse = " ")
-    output = list("col1" = "blue",
-                  "col2" = "green",
-                  "col3" = "blue", 
-                  "col4" = "green",
-                  "col5" = "blue", 
-                  "col6" = "green",
-                  "col7" = "green",
-                  "text1" = "Shapiro-Wilks",
-                  "text1a1" = "Correlation",
-                  "text2" = "F-Test",
-                  "text3" = "Anova Test",
-                  "text4" = "Student t-test",
-                  "text5" = "Welch's t-test",
-                  "text6" = "Wilcoxon Test",
-                  "text7" = "bayes tree",
-                  "names" = d,
-                  "method" = as.character(method),
-                  "inputNames" = x1,
-                  "inputNames0" = x1,
-                  "inputNames2" = x2,
-                  "inputNames3" = x3,
-                  "inputNames4" = x4,
-                  "inputNames5" = x5,
-                  "inputNames6" = x6,
-                  "inputNames7" = x7
-                  )
-    return(output)
-  }
+graphicGen <- function(x, method, colNames, dataSetName){
+  x1 = x[["x1"]]
+  x2 = dataAdjust(x[["x2"]])
+  x3 = dataAdjust(x[["x3"]])
+  x4 = dataAdjust(x[["x4"]])
+  x5 = dataAdjust(x[["x5"]])
+  x6 = dataAdjust(x[["x6"]])
+  x7 = dataAdjust(x[["x7"]])
+  x8 = x[["x8"]]
+  x9 = x[["x9"]]
+  
+  output = list("col1a1" = "blue",
+                "col1a2" = "green",
+                "col2a1" = "blue", 
+                "col2a2" = "green",
+                "col3a1" = "blue", 
+                "col3a2" = "green",
+                "col3a3" = "green",
+                "col3a4" = "green",
+                "text1a1" = "Shapiro-Wilks",
+                "text1a2" = "Correlation",
+                "text2a1" = "F-Test",
+                "text2a2" = "Anova Test",
+                "text3a1" = "Student t-test",
+                "text3a2" = "Welch's t-test",
+                "text3a3" = "Wilcoxon Test",
+                "text3a4" = "PCA",
+                "text4a1" = "glm AIC values",
+                "names" = colNames,
+                "dataName" = dataSetName,
+                "method" = as.character(method),
+                "inputNames1a1" = x1,
+                "inputNames1a2" = x2,
+                "inputNames2a1" = x3,
+                "inputNames2a2" = x4,
+                "inputNames3a1" = x5,
+                "inputNames3a2" = x6,
+                "inputNames3a3" = x7,
+                "inputNames3a4" = x8,
+                "inputNames4a1" = x9
+  )
+  return(output)
+}
 
 #' splitts calculation in paired and unpaired sections
 #' @param method is the method parameter and the 
@@ -137,19 +165,24 @@ pairedTest <- function(input){
 #' @return extacts p value of all un-paired tests and adds them to data.frame
 unPairedTest <- function(input){
   welchT %<-% welchTest(input)
+  studentTest %<-% studentt(input)
   shapiroT %<-% shapiroT(input)
   corT %<-% corTest(input)
-  chiT %<-% chiSQTest(input)
   anovaT %<-% anovaTest(input)
   f.test %<-% fTest(input)
+  wilco %<-% wilcoxonTest(input)
+  pcaT %<-% pcaReduce(input)
+  glmT %<-% glmTest(input)
   
   output = list("x1" = shapiroT,
-                "x2" = f.test,
-                "x3" = anovaT,
-                "x4" = welchT,
-                "x5" = chiT,
-                "x6" = corT,
-                "x7" = corT)
+                "x2" = corT,
+                "x3" = f.test,
+                "x4" = anovaT,
+                "x5" = studentTest,
+                "x6" = welchT,
+                "x7" = wilco,
+                "x8" = pcaT,
+                "x9" = glmT)
             
   return(output)
 }
@@ -159,7 +192,7 @@ unPairedTest <- function(input){
 #' @return performing muliple calculations on a data frame with multiple columns
 multicol <- function(x){
   shapiroTest = disc.normal(x)
-  corTest = cor(x, use = "complete.obs") 
+  corTest = cor(x, use = "complete.obs")
   varTest = var(x, na.rm = TRUE)
   matrixttest = t.test.matrix(x)
   

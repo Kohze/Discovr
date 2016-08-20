@@ -10,7 +10,7 @@ welchTest(mat, ...)
 \item{input}{A data.frame or data.table}
 }
 \value{
-indicates whether parameter are from same population
+indicates whether parameter are from same population - with different variances. 
 the logic of the function syntax was fount at http://www.sthda.com/english/wiki/matrix-of-student-t-test
 }
 \description{
