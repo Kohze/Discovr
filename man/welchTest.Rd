@@ -4,7 +4,7 @@
 \alias{welchTest}
 \title{Statistical Functions}
 \usage{
-welchTest(mat, ...)
+welchTest(inp, ...)
 }
 \arguments{
 \item{input}{A data.frame or data.table}

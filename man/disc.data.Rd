@@ -8,6 +8,10 @@ disc.data(x, method = "unPaired", preset = NULL)
 }
 \arguments{
 \item{x}{is the dataframe input}
+
+\item{method}{is "paired" or "unPaired"}
+
+\item{preset}{is the invididual choosen preset ("facs","frap")}
 }
 \value{
 returns modified data output specific for the choosen method

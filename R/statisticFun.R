@@ -4,39 +4,38 @@
 #' @param input A data.frame or data.table
 #' @return indicates whether parameter are from same population - with different variances. 
 #' the logic of the function syntax was fount at http://www.sthda.com/english/wiki/matrix-of-student-t-test
-welchTest <- function(mat, ...) {
-  mat <- as.matrix(mat)
-  n = ncol(mat)
-  p.mat = matrix(NA, n, n)
-  diag(p.mat) = 1
+welchTest <- function(inp, ...) {
+  inp <- as.matrix(inp)
+  n = ncol(inp)
+  p.inp = matrix(NA, n, n)
+  diag(p.inp) = 1
   for (i in 1:(n - 1)) {
     for (j in (i + 1):n) {
-      test = t.test(mat[, i], mat[, j], ...)
-      p.mat[i, j] <- p.mat[j, i] <- test$p.value
+      test = t.test(inp[, i], inp[, j], ...)
+      p.inp[i, j] <- p.inp[j, i] <- test$p.value
     }
   }
-  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
-  signif(p.mat,3)
+  colnames(p.inp) <- rownames(p.inp) <- colnames(inp)
+  signif(p.inp,3)
 }
 
 #' student t test
 #' @param input A data.frame or data.table
 #' @return indicates whether parameters are from same population - with equal variances. 
-studentt <- function(mat, ...) {
-  mat <- as.matrix(mat)
-  n = ncol(mat)
-  p.mat = matrix(NA, n, n)
-  diag(p.mat) = 1
+studentt <- function(inp, ...) {
+  inp <- as.matrix(inp)
+  n = ncol(inp)
+  p.inp = matrix(NA, n, n)
+  diag(p.inp) = 1
   for (i in 1:(n - 1)) {
     for (j in (i + 1):n) {
-      test = t.test(mat[, i], mat[, j], ..., var.equal = TRUE)
-      p.mat[i, j] <- p.mat[j, i] <- test$p.value
+      test = t.test(inp[, i], inp[, j], ..., var.equal = TRUE)
+      p.inp[i, j] <- p.inp[j, i] <- test$p.value
     }
   }
-  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
-  signif(p.mat,3)
+  colnames(p.inp) <- rownames(p.inp) <- colnames(inp)
+  signif(p.inp,3)
 }
-
 
 #' Shapiro Wilks Test
 #' @param input A data.frame or data.table
@@ -64,73 +63,73 @@ shapiroT <- function(x){
 #' Anova Test
 #' @param input A data.frame or data.table
 #' @return analyzes the variance of the given samples
-anovaTest <- function(mat, ...) {
-  mat <- as.matrix(mat)
-  n = ncol(mat)
-  p.mat = matrix(NA, n, n)
-  diag(p.mat) = 1
+anovaTest <- function(inp, ...) {
+  inp <- as.matrix(inp)
+  n = ncol(inp)
+  p.inp = matrix(NA, n, n)
+  diag(p.inp) = 1
   for (i in 1:(n - 1)) {
     for (j in (i + 1):n) {
-      test = aov(mat[, i] ~ mat[, j])
-      p.mat[i, j] <- p.mat[j, i] <- test$coefficients[2]
+      test = aov(inp[, i] ~ inp[, j])
+      p.inp[i, j] <- p.inp[j, i] <- test$coefficients[2]
     }
   }
-  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
-  signif(p.mat,3)
+  colnames(p.inp) <- rownames(p.inp) <- colnames(inp)
+  signif(p.inp,3)
 }
 
 #' Chi Square Test
 #' @param input A data.frame or data.table
 #' @return analyzes goodness of fit of fittet line to dataset
-chiSQTest <- function(mat, ...) {
-  mat <- as.matrix(mat)
-  n = ncol(mat)
-  p.mat = matrix(NA, n, n)
-  diag(p.mat) = 1
+chiSQTest <- function(inp, ...) {
+  inp <- as.matrix(inp)
+  n = ncol(inp)
+  p.inp = matrix(NA, n, n)
+  diag(p.inp) = 1
   for (i in 1:(n - 1)) {
     for (j in (i + 1):n) {
-      test = chisq.test(mat[, i], mat[, j])
-      p.mat[i, j] <- p.mat[j, i] <- test$p.value
+      test = chisq.test(inp[, i], inp[, j])
+      p.inp[i, j] <- p.inp[j, i] <- test$p.value
     }
   }
-  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
-  signif(p.mat,3)
+  colnames(p.inp) <- rownames(p.inp) <- colnames(inp)
+  signif(p.inp,3)
 }
 
 #' Wilcoxon Test
 #' @param input A data.frame or data.table
 #' @return Alternative test for the paired t-test if data is not normal - on dependend samples
-wilcoxonTest <- function(mat, ...) {
-  mat <- as.matrix(mat)
-  n = ncol(mat)
-  p.mat = matrix(NA, n, n)
-  diag(p.mat) = 1
+wilcoxonTest <- function(inp, ...) {
+  inp <- as.matrix(inp)
+  n = ncol(inp)
+  p.inp = matrix(NA, n, n)
+  diag(p.inp) = 1
   for (i in 1:(n - 1)) {
     for (j in (i + 1):n) {
-      test = wilcox.test(mat[, i], mat[, j], ...)
-      p.mat[i, j] <- p.mat[j, i] <- test$p.value
+      test = wilcox.test(inp[, i], inp[, j], exact = FALSE,  ...)
+      p.inp[i, j] <- p.inp[j, i] <- test$p.value
     }
   }
-  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
-  signif(p.mat,3)
+  colnames(p.inp) <- rownames(p.inp) <- colnames(inp)
+  signif(p.inp,3)
 }
 
 #' Mann-Whitney U test - Wilcoxon sum rank test
 #' @param input A data.frame or data.table
 #' @return Alternative test for the paired t-test if data is not normal - on independent samples
-mannWhitTest <- function(mat, ...) {
-  mat <- as.matrix(mat)
-  n = ncol(mat)
-  p.mat = matrix(NA, n, n)
-  diag(p.mat) = 1
+mannWhitTest <- function(inp, ...) {
+  inp <- as.matrix(inp)
+  n = ncol(inp)
+  p.inp = matrix(NA, n, n)
+  diag(p.inp) = 1
   for (i in 1:(n - 1)) {
     for (j in (i + 1):n) {
-      test = wilcox.test(mat[, i], mat[, j], ..., paired = FALSE)
-      p.mat[i, j] <- p.mat[j, i] <- test$p.value
+      test = wilcox.test(inp[, i], inp[, j], ..., paired = FALSE)
+      p.inp[i, j] <- p.inp[j, i] <- test$p.value
     }
   }
-  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
-  signif(p.mat,3)
+  colnames(p.inp) <- rownames(p.inp) <- colnames(inp)
+  signif(p.inp,3)
 }
 
 #' PCA dimension reduction
@@ -151,20 +150,20 @@ pcaReduce <- function(input){
 #' F-Test
 #' @param input A data.frame or data.table
 #' @return compares variances of the samples - only normal distribution
-fTest <- function(mat, ...) {
-  mat <- as.matrix(mat)
-  n = ncol(mat)
-  p.mat = matrix(NA, n, n)
-  diag(p.mat) = 1
+fTest <- function(inp, ...) {
+  inp <- as.matrix(inp)
+  n = ncol(inp)
+  p.inp = matrix(NA, n, n)
+  diag(p.inp) = 1
   for (i in 1:(n - 1)) {
     for (j in (i + 1):n) {
-      test = var.test(mat[, i], mat[, j])
+      test = var.test(inp[, i], inp[, j])
       test = as.numeric(test$statistic)
-      p.mat[i, j] <- p.mat[j, i] <- test
+      p.inp[i, j] <- p.inp[j, i] <- test
     }
   }
-  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
-  signif(p.mat,3)
+  colnames(p.inp) <- rownames(p.inp) <- colnames(inp)
+  signif(p.inp,3)
 }
 
 #' GLM
@@ -179,4 +178,3 @@ glmTest <- function(input){
   output = toJSON(list("name" = "query", "children" = preOutput), pretty = TRUE)
   return(output)
 }
-

@@ -4,7 +4,7 @@
 \alias{fTest}
 \title{F-Test}
 \usage{
-fTest(mat, ...)
+fTest(inp, ...)
 }
 \arguments{
 \item{input}{A data.frame or data.table}

@@ -4,7 +4,7 @@
 \alias{chiSQTest}
 \title{Chi Square Test}
 \usage{
-chiSQTest(mat, ...)
+chiSQTest(inp, ...)
 }
 \arguments{
 \item{input}{A data.frame or data.table}

@@ -4,7 +4,7 @@
 \alias{anovaTest}
 \title{Anova Test}
 \usage{
-anovaTest(mat, ...)
+anovaTest(inp, ...)
 }
 \arguments{
 \item{input}{A data.frame or data.table}

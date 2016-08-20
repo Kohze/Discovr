@@ -4,7 +4,7 @@
 \alias{mannWhitTest}
 \title{Mann-Whitney U test - Wilcoxon sum rank test}
 \usage{
-mannWhitTest(mat, ...)
+mannWhitTest(inp, ...)
 }
 \arguments{
 \item{input}{A data.frame or data.table}

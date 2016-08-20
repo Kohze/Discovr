@@ -23,19 +23,48 @@ disc <- function(x, method = "unPaired", preset = NULL){
 
 #' output of numerical values
 #' @param x is the dataframe input 
+#' @param method is "paired" or "unPaired"
+#' @param preset is the invididual choosen preset ("facs","frap")
 #' @return returns modified data output specific for the choosen method
 #' @export
 disc.data <- function(x, method = "unPaired", preset = NULL){
   input = as.data.frame(x)
   preOut = methodChoice(method, input)
-  preVec = fromJSON(preOut$x1)
-  preOut$x1 = preVec$children
   
-  # if(method == "paired"){
-  #   
-  # } else {
-  #   
-  # }
+  preVec = fromJSON(preOut$x1)
+  preVec2 = fromJSON(preOut$x8)
+  preVec3 = fromJSON(preOut$x9)
+  
+  preOut$x1 = preVec$children
+  preOut$x8 = preVec2$children
+  preOut$x9 = preVec3$children
+  
+  #future module: different naming if paired/unpaired distinct methods.
+   if(method == "paired"){
+     names(preOut) = c(
+       "shapiro.test",
+       "correlation.test",
+       "f.test",
+       "anova.test",
+       "student.test",
+       "welch.test",
+       "wilcoxon.test",
+       "pca",
+       "glm"
+    )
+   } else {
+    names(preOut) = c(
+      "shapiro.test",
+      "correlation.test",
+      "f.test",
+      "anova.test",
+      "student.test",
+      "welch.test",
+      "wilcoxon.test",
+      "pca",
+      "glm"
+    ) 
+   }
   
   return(preOut)
 }
@@ -86,6 +115,34 @@ dataAdjust <- function(a){
   return(output)
 }
 
+#' function to recover data from JSON list
+#' @param input is the specific JSON list dataset
+#' @return returns the recovered data.frame
+
+listOut <- function(input){
+  preVec = fromJSON(input)
+  preOut = preVec$children
+  return(preOut$size)
+}
+
+#' function to convert a value to color
+#' @param input is the specific method output
+#' @param bigger indicates if the "wanted" value is > or < 0.05
+#' @return returns the color name
+colorTransla <- function(input, bigger = TRUE, minp = 0.05){
+
+  if(bigger == TRUE){
+    x = length(which( input > minp))/length(input)
+  } else {
+    x = length(which( input < minp))/length(input)
+  }
+  
+  colorRange <- colorRampPalette(c("red","grey","green"))
+  col = colorRange(100)
+  x = round(x * 100)
+  return(col[x])
+}  
+
 #' splitts calculation in paired and unpaired sections
 #' @param method is the method parameter and the 
 #' @param input is the data.frame
@@ -101,14 +158,15 @@ graphicGen <- function(x, method, colNames, dataSetName){
   x8 = x[["x8"]]
   x9 = x[["x9"]]
   
-  output = list("col1a1" = "blue",
-                "col1a2" = "green",
-                "col2a1" = "blue", 
-                "col2a2" = "green",
-                "col3a1" = "blue", 
-                "col3a2" = "green",
-                "col3a3" = "green",
-                "col3a4" = "green",
+  output = list("col1a1" = colorTransla(listOut(x[["x1"]]), bigger = TRUE),
+                "col1a2" = colorTransla(listOut(x[["x1"]]), bigger = FALSE),
+                "col2a1" = colorTransla(x[["x3"]], bigger = TRUE), 
+                "col2a2" = colorTransla(x[["x3"]], bigger = FALSE),
+                "col3a1" = "grey", 
+                "col3a2" = colorTransla(x[["x4"]], bigger = TRUE), 
+                "col3a3" = colorTransla(x[["x2"]], minp = 0.2),
+                "col3a4" = colorTransla(x[["x2"]], minp = 0.2),
+                
                 "text1a1" = "Shapiro-Wilks",
                 "text1a2" = "Correlation",
                 "text2a1" = "F-Test",
@@ -118,9 +176,21 @@ graphicGen <- function(x, method, colNames, dataSetName){
                 "text3a3" = "Wilcoxon Test",
                 "text3a4" = "PCA",
                 "text4a1" = "glm AIC values",
+                
+                "textBox1a1" = "normal distributed if > 0.05 ",
+                "textBox1a2" = "indicates simple correlation",
+                "textBox2a1" = "paired variance if > 0.05 | normal",
+                "textBox2a2" = "paired variance if > 0.05 | non normal",
+                "textBox3a1" = "for non paired variance datasets",
+                "textBox3a2" = "for paired variance datasets",
+                "textBox3a3" = "tests non normal datasets",
+                "textBox3a4" = "to reduce dimensionality",
+                "textBox4a1" = "to find regression coefficients",
+                
                 "names" = colNames,
                 "dataName" = dataSetName,
                 "method" = as.character(method),
+                
                 "inputNames1a1" = x1,
                 "inputNames1a2" = x2,
                 "inputNames2a1" = x3,
@@ -149,14 +219,26 @@ methodChoice <- function(method,x){
 #' @param input taking the output of all statistical methods
 #' @return extacts p value of all paired tests and adds them to data.frame
 pairedTest <- function(input){
+  welchT %<-% welchTest(input, paired = TRUE)
+  studentTest %<-% studentt(input, paired = TRUE)
   shapiroT %<-% shapiroT(input)
   corT %<-% corTest(input)
-  chiT %<-% chiSQTest(input)
-  manwiT %<-% mannWhitTest(input) 
-  wilcoT %<-% wilcoxonTest(input) 
   anovaT %<-% anovaTest(input)
+  f.test %<-% fTest(input)
+  wilco %<-% wilcoxonTest(input, paired = TRUE)
+  pcaT %<-% pcaReduce(input)
+  glmT %<-% glmTest(input)
   
-  #create data.frame ordered by test function
+  output = list("x1" = shapiroT,
+                "x2" = corT,
+                "x3" = f.test,
+                "x4" = anovaT,
+                "x5" = studentTest,
+                "x6" = welchT,
+                "x7" = wilco,
+                "x8" = pcaT,
+                "x9" = glmT)
+  
   return(output)
 }
 
@@ -187,19 +269,6 @@ unPairedTest <- function(input){
   return(output)
 }
 
-#' @title multicol
-#' @param x A data.frame or data.table
-#' @return performing muliple calculations on a data frame with multiple columns
-multicol <- function(x){
-  shapiroTest = disc.normal(x)
-  corTest = cor(x, use = "complete.obs")
-  varTest = var(x, na.rm = TRUE)
-  matrixttest = t.test.matrix(x)
-  
-  output = list("t.test" = matrixttest, "correlation" = corTest, "variance" = varTest, "shapiro" = shapiroTest)
-  return(output)
-}
-
 #' @title disc.normal() 
 #' @param x A data.frame or data.table
 #' @return showing shapiro.test output of the data.frame
@@ -213,8 +282,8 @@ disc.normal <- function(x){
   
   nameColumn = names(x)
   output = data.frame("nameColumn" = nameColumn, "pvalue" = pval)
-  output$isNormalDistributed[output$pvalue < 0.05] = TRUE
-  output$isNormalDistributed[output$pvalue > 0.05] = FALSE
+  output$isNormalDistributed[output$pvalue > 0.05] = TRUE
+  output$isNormalDistributed[output$pvalue < 0.05] = FALSE
   
   #call d3.js graphic function via htmlwidgets here
   return(output)

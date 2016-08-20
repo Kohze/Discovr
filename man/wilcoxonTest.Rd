@@ -4,7 +4,7 @@
 \alias{wilcoxonTest}
 \title{Wilcoxon Test}
 \usage{
-wilcoxonTest(mat, ...)
+wilcoxonTest(inp, ...)
 }
 \arguments{
 \item{input}{A data.frame or data.table}

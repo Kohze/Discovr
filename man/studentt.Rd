@@ -4,7 +4,7 @@
 \alias{studentt}
 \title{student t test}
 \usage{
-studentt(mat, ...)
+studentt(inp, ...)
 }
 \arguments{
 \item{input}{A data.frame or data.table}
