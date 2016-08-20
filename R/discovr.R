@@ -1,4 +1,5 @@
-#' @title discovr() 
+#' @title discovr()
+#' @author Robin Kohze
 #' @param x A data.frame or data.table
 #' @param method The method indicates "paired" or "unpaired" testing
 #' @param preset As preset mutliple techniques are allowed, such as "FACS" or "FRAP".
@@ -7,7 +8,6 @@
 #' @include graphics.R
 #' @include statisticFun.R
 #' @import future
-#' @import ggtern
 #' @import d3three
 #' @import jsonlite
 #' @examples 
