@@ -24,11 +24,11 @@ with x as data.frame or data.table. Method is either "paired" or "unPaired".
 
 The main module generates the interactive graphical cluster. By clicking on each of the dots the bubble chart appears for the respective test. The colored lines indicate the output of the test, and the most preferable test to conclude. Green stands for preferable, grey for neutral, red for not applyable. By hoovering over the dots the name of each test related to the dot is displayed on the right area. 
 
-![alt tag](http://vaionex.com/rob/Discovr/DmainInterface.jpeg)
+![alt tag](http://vaionex.com/Discovr/DmainInterface.jpeg)
 
 Here are 3 examples of bubble plots. The bubble size is related to the test output of each test set. By hoovering over the bubbles the exact value is visible as tooltip. To generate those bubbles the D3.pack() routine is used. 
 
-![alt tag](http://vaionex.com/rob/Discovr/DSC03137.jpg)
+![alt tag](http://vaionex.com/Discovr/DSC03137.jpg)
 
 
 ###The data module:
@@ -37,7 +37,7 @@ Here are 3 examples of bubble plots. The bubble size is related to the test outp
 
 The data module allows to extract all the data frames the main module graphic output relies on. It will output a list of data frames.     
 
-![alt tag](http://vaionex.com/rob/Discovr/disc-data.JPG)
+![alt tag](http://vaionex.com/Discovr/disc-data.JPG)
 
 
 ###The shapiro module:
@@ -46,7 +46,7 @@ The data module allows to extract all the data frames the main module graphic ou
 
 The shapiro module quickly applies a normality test on all columns and adds a TRUE / FALSE as information next to it.    
 
-![alt tag](http://vaionex.com/rob/Discovr/disc-normal.JPG)
+![alt tag](http://vaionex.com/Discovr/disc-normal.JPG)
 
 Presets
 --------------
