@@ -94,7 +94,7 @@ Example
 
 After installation and library() call of Discovr, type in:
 
-    example(Discovr)
+    disc(mtcars)
 
 
 Comming Next
