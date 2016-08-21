@@ -7,6 +7,11 @@ The discovr package enables a fast and efficient way to test the most common sta
 
 During the development we saw the possibility of a rich d3 interactive interface to connect the different tests. Therefore we created from scratch a costumized D3 htmlwidget. 
 
+To have an instant access to all data, the future package is integrated to allow a parallel processing of all statistical tests.
+
+The htmlwidget d3 plot is placed here: 
+
+    https://github.com/Kohze/Discovr_graphics
 
 Website
 --------------
@@ -87,6 +92,12 @@ After installation and library() call of Discovr, type in:
 
     example(Discovr)
 
+
+Comming Next
+--------------    
+
+- coloring for each bubble depending on significance level
+- adding other interactive plot ideas and features with d3
 
 Known Issues
 --------------
