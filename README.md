@@ -24,7 +24,7 @@ with x as data.frame or data.table. Method is either "paired" or "unPaired".
 
 The main module generates the interactive graphical cluster. By clicking on each of the dots the bubble chart appears for the respective test. The colored lines indicate the output of the test, and the most preferable test to conclude. Green stands for preferable, grey for neutral, red for not applyable. By hoovering over the dots the name of each test related to the dot is displayed on the right area. 
 
-![alt tag](http://vaionex.com/Discovr/DmainInterface.jpeg)
+![alt tag](http://vaionex.com/Discovr/mainInterface.jpeg)
 
 Here are 3 examples of bubble plots. The bubble size is related to the test output of each test set. By hoovering over the bubbles the exact value is visible as tooltip. To generate those bubbles the D3.pack() routine is used. 
 
