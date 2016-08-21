@@ -9,14 +9,12 @@ During the development we saw the possibility of a rich d3 interactive interface
 
 To have an instant access to all data, the future package is integrated to allow a parallel processing of all statistical tests.
 
-The htmlwidget d3 plot is placed here: 
+--------------
+
+####The htmlwidget d3 plot can be found here: 
 
     https://github.com/Kohze/Discovr_graphics
 
-Website
---------------
-   
-    http://vaionex.com/discovr/
 
 Overview
 --------------
@@ -40,7 +38,7 @@ Here are 3 examples of bubble plots. The bubble size is related to the test outp
 
     disc.data(x, method = "unPaired", preset = NULL)
 
-The data module allows to extract all the data frames the main module graphic output relies on. It will output a list of data frames.     
+The data module allows to extract all the data frames the main module graphic output relies on. It will output a list of data frames. (the f.test is here shown as example - all other tests are also available)    
 
 ![alt tag](http://vaionex.com/Discovr/disc-data.JPG)
 
