@@ -1,11 +1,17 @@
+
 # Discovr
 
+GSOC Page - This repository was created during GSOC 2016. A summary of the GSOC project can be at the website below. 
 
-Graphical clusters of a variety of statistical analysis methods 
+    http://vaionex.com/discovrWB/
+
+--------------
+
+Graphical clusters of a variety of statistical methods in R. 
 
 The discovr package enables a fast and efficient way to test the most common statistical analysis methods. It therefore allows users to quickly check method specific indicators for the viability of a given method. Thereby, it reduces the trial and error approach R user yet approach most datasets.
 
-During the development we saw the possibility of a rich d3 interactive interface to connect the different tests. Therefore we created from scratch a costumized D3 htmlwidget. 
+During the development we saw the possibility of a rich d3 interactive interface to connect the different tests. Therefore we created a costumized D3 htmlwidget from scratch. 
 
 To have an instant access to all data, the future package is integrated to allow a parallel processing of all statistical tests.
 
