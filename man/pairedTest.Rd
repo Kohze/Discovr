@@ -2,17 +2,17 @@
 % Please edit documentation in R/discovr.R
 \name{pairedTest}
 \alias{pairedTest}
-\title{Output for only paired tests}
+\title{calculating paired tests}
 \usage{
 pairedTest(input)
 }
 \arguments{
-\item{input}{taking the output of all statistical methods}
+\item{input}{is the data.frame}
 }
 \value{
-extacts p value of all paired tests and adds them to data.frame
+returns list with all statistical test results
 }
 \description{
-Output for only paired tests
+calculating paired tests
 }
 

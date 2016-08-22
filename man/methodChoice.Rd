@@ -9,7 +9,7 @@ methodChoice(method, x)
 \arguments{
 \item{method}{is the method parameter and the}
 
-\item{input}{is the data.frame}
+\item{input}{is the input data.frame}
 }
 \value{
 returns the statistical calculations for each section

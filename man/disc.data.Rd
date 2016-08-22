@@ -14,7 +14,7 @@ disc.data(x, method = "unPaired", preset = NULL)
 \item{preset}{is the invididual choosen preset ("facs","frap")}
 }
 \value{
-returns modified data output specific for the choosen method
+returns a list of data.frames specific for the choosen method
 }
 \description{
 output of numerical values

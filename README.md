@@ -1,7 +1,7 @@
 
 # Discovr
 
-GSOC Page - This repository was created during GSOC 2016. A summary of the GSOC project can be at the website below. 
+GSOC Page - This repository was created during GSOC 2016. As all commits were done for GSOC by the same user this page represents the best overview over the project. A summary of the GSOC project can be at the website below. 
 
     http://vaionex.com/discovrWB/
 

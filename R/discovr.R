@@ -1,10 +1,9 @@
 #' @title discovr()
 #' @author Robin Kohze
 #' @param x A data.frame or data.table
-#' @param method The method indicates "paired" or "unpaired" testing
+#' @param method The method indicates "paired" or "unPaired" testing
 #' @param preset As preset mutliple techniques are allowed, such as "FACS" or "FRAP".
-#' @param style A style input such as "heatmap" / "cleveland" / "ternary" 
-#' @return The calculation output
+#' @return The main disc() function returns the htmlwidget graphic
 #' @include statisticFun.R
 #' @examples 
 #' disc(mtcars)
@@ -26,7 +25,7 @@ disc <- function(x, method = "unPaired", preset = NULL){
 #' @param x is the dataframe input 
 #' @param method is "paired" or "unPaired"
 #' @param preset is the invididual choosen preset ("facs","frap")
-#' @return returns modified data output specific for the choosen method
+#' @return returns a list of data.frames specific for the choosen method
 #' @export
 disc.data <- function(x, method = "unPaired", preset = NULL){
   input = as.data.frame(x)
@@ -83,10 +82,9 @@ presetFunction <- function(presetApp, x) {
   return(output)
 }
 
-#' splitts calculation in paired and unpaired sections
-#' @param method is the method parameter and the 
-#' @param input is the data.frame
-#' @return returns the statistical calculations for each section
+#' creates data.frame to htmlwidget json
+#' @param a is data matrix
+#' @return returns json list
 dataAdjust <- function(a){
   result = expand.grid(a = colnames(a), b = colnames(a))
   result$c[result$a == result$b] = TRUE
@@ -145,9 +143,11 @@ colorTransla <- function(input, bigger = TRUE, minp = 0.05){
 }  
 
 #' splitts calculation in paired and unpaired sections
-#' @param method is the method parameter and the 
-#' @param input is the data.frame
-#' @return returns the statistical calculations for each section
+#' @param method is the method name for the widget
+#' @param colNames contains all column names for the widget
+#' @dataSetName is the name of the input data.frame for the widget
+#' @param x is the list of data matrixes
+#' @return returns the final input for the disc.graphics module
 graphicGen <- function(x, method, colNames, dataSetName){
   x1 = x[["x1"]]
   x2 = dataAdjust(x[["x2"]])
@@ -207,7 +207,7 @@ graphicGen <- function(x, method, colNames, dataSetName){
 
 #' splitts calculation in paired and unpaired sections
 #' @param method is the method parameter and the 
-#' @param input is the data.frame
+#' @param input is the input data.frame
 #' @return returns the statistical calculations for each section
 methodChoice <- function(method,x){
   output = switch(method,
@@ -216,9 +216,9 @@ methodChoice <- function(method,x){
   return(output)
 }
 
-#' Output for only paired tests
-#' @param input taking the output of all statistical methods
-#' @return extacts p value of all paired tests and adds them to data.frame
+#' calculating paired tests
+#' @param input is the data.frame
+#' @return returns list with all statistical test results
 pairedTest <- function(input){
   welchT %<-% welchTest(input, paired = TRUE)
   studentTest %<-% studentt(input, paired = TRUE)
@@ -243,9 +243,9 @@ pairedTest <- function(input){
   return(output)
 }
 
-#' Output for only un-paired tests
-#' @param input taking the output of all statistical methods
-#' @return extacts p value of all un-paired tests and adds them to data.frame
+#' calculating un-paired tests
+#' @param input is the data.frame
+#' @return returns the statistical calculations for each section
 unPairedTest <- function(input){
   welchT %<-% welchTest(input)
   studentTest %<-% studentt(input)
@@ -286,6 +286,5 @@ disc.normal <- function(x){
   output$isNormalDistributed[output$pvalue > 0.05] = TRUE
   output$isNormalDistributed[output$pvalue < 0.05] = FALSE
   
-  #call d3.js graphic function via htmlwidgets here
   return(output)
 }

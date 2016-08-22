@@ -2,17 +2,17 @@
 % Please edit documentation in R/discovr.R
 \name{unPairedTest}
 \alias{unPairedTest}
-\title{Output for only un-paired tests}
+\title{calculating un-paired tests}
 \usage{
 unPairedTest(input)
 }
 \arguments{
-\item{input}{taking the output of all statistical methods}
+\item{input}{is the data.frame}
 }
 \value{
-extacts p value of all un-paired tests and adds them to data.frame
+returns the statistical calculations for each section
 }
 \description{
-Output for only un-paired tests
+calculating un-paired tests
 }
 

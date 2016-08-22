@@ -2,19 +2,17 @@
 % Please edit documentation in R/discovr.R
 \name{dataAdjust}
 \alias{dataAdjust}
-\title{splitts calculation in paired and unpaired sections}
+\title{creates data.frame to htmlwidget json}
 \usage{
 dataAdjust(a)
 }
 \arguments{
-\item{method}{is the method parameter and the}
-
-\item{input}{is the data.frame}
+\item{a}{is data matrix}
 }
 \value{
-returns the statistical calculations for each section
+returns json list
 }
 \description{
-splitts calculation in paired and unpaired sections
+creates data.frame to htmlwidget json
 }
 

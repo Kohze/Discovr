@@ -7,12 +7,14 @@
 graphicGen(x, method, colNames, dataSetName)
 }
 \arguments{
-\item{method}{is the method parameter and the}
+\item{x}{is the list of data matrixes}
 
-\item{input}{is the data.frame}
+\item{method}{is the method name for the widget}
+
+\item{colNames}{contains all column names for the widget}
 }
 \value{
-returns the statistical calculations for each section
+returns the final input for the disc.graphics module
 }
 \description{
 splitts calculation in paired and unpaired sections
