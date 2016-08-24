@@ -84,8 +84,11 @@ Installation
 --------------
 
     if (!require("devtools")) install.packages("devtools")
+
     install.packages("jsonlite")
     install.packages("future")
+    install.packages("Rcpp")
+    devtools::install_github('ramnathv/htmlwidgets')
     devtools::install_github("Kohze/Discovr_graphics")
     devtools::install_github("Kohze/Discovr")
 
